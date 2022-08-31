@@ -54,7 +54,7 @@ pool.close()
 # * filter the chiral ones  with a maximum integer of 32
 # * Build a function suitable for multiprocessing
 
-# In[3]:
+# In[1]:
 
 
 import numpy as np
@@ -105,11 +105,11 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 # Prepare running
 
-# In[64]:
+# In[2]:
 
 
 d=[{'n':6,'N':4000000,'max':11,'imax':0},
-   {'n':7,'N':50000000,'max':15,'imax':10},
+   {'n':7,'N':8000000,'max':13,'imax':0},
    {'n':8,'N':50000000,'max':10,'imax':10},
    {'n':9,'N':50000000,'max':10,'imax':10},
    {'n':10,'N':50000000,'max':10,'imax':10},
@@ -148,7 +148,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[65]:
+# In[3]:
 
 
 import dask.array as da
@@ -157,7 +157,7 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 
 
-# In[67]:
+# In[4]:
 
 
 size_old=0
@@ -285,20 +285,20 @@ ll[[0 in x for x in ll]]
 # ### Check number of silutions
 # From: https://doi.org/10.5281/zenodo.5526707
 
-# In[53]:
+# In[7]:
 
 
 sl=pd.read_json('solutions.json')
 
 
-# In[54]:
+# In[74]:
 
 
 #sl['zs']=sl['solution'].astype(str)
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[56]:
+# In[8]:
 
 
 sl=sl[sl['n']==6]
@@ -311,7 +311,7 @@ sl.shape
 5569
 
 
-# In[40]:
+# In[76]:
 
 
 (sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
