@@ -157,7 +157,7 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 
 
-# In[ ]:
+# In[20]:
 
 
 size_old=0
@@ -196,22 +196,6 @@ while Δ_size>0:
         break
 
     i+=1
-
-
-# 
-
-# In[104]:
-
-
-#i=0
-i+=1
-i
-
-
-# In[99]:
-
-
-
 
 
 # In[16]:
@@ -277,45 +261,39 @@ for i in range(2):
 
 # ### Check number of silutions
 
-# In[82]:
+# In[33]:
 
 
 sl=pd.read_json('solutions.json')
 
 
-# In[83]:
+# In[34]:
 
 
 #sl['zs']=sl['solution'].astype(str)
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[96]:
+# In[35]:
 
 
-sl=sl[sl['n']==7]
+sl=sl[sl['n']==8]
 sl.shape
 
 
-# In[85]:
+# In[36]:
 
 
 (sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
 
 
-# In[92]:
+# In[26]:
 
 
-s=set()
+sl=sl.rename({'solution':'z'},axis='columns')
 
 
-# In[ ]:
-
-
-sl.rename({'solution':'z'},axis='columns')
-
-
-# In[ ]:
+# In[27]:
 
 
 sl=sl[['z']].append(df[['z']]).reset_index(drop=True)
@@ -324,25 +302,25 @@ sl=sl.drop_duplicates('zs',keep=False).drop('zs',axis='columns').reset_index(dro
 sl.shape
 
 
-# In[ ]:
+# In[28]:
 
 
 sl
 
 
-# In[14]:
+# In[29]:
 
 
-{ tuple(x) for x in sl['solution'].to_list() }.difference( { tuple(x) for x in df['z'].to_list() }  )
+#{ tuple(x) for x in sl['z'].to_list() }.difference( { tuple(x) for x in df['z'].to_list() }  )
 
 
-# In[15]:
+# In[30]:
 
 
-{ tuple(x) for x in df['z'].to_list() }.difference( { tuple(x) for x in sl['solution'].to_list() }  )
+#{ tuple(x) for x in df['z'].to_list() }.difference( { tuple(x) for x in sl['solution'].to_list() }  )
 
 
-# In[99]:
+# In[31]:
 
 
 df['z'].apply(lambda l:np.abs(l).max()).max()
