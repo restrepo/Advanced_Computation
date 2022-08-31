@@ -35,7 +35,7 @@ def f(x):
 # In[176]:
 
 
-N=10000000
+N=100000#00
 result = [f(x) for x in range(N)]
 
 
@@ -105,11 +105,11 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 # Prepare running
 
-# In[93]:
+# In[2]:
 
 
 d=[{'n':6,'N':4000000,'max':11},
-   {'n':7,'N':50000000,'max':11},
+   {'n':7,'N':50000000,'max':12},
    {'n':8,'N':50000000,'max':10},
    {'n':9,'N':50000000,'max':10},
    {'n':10,'N':50000000,'max':10},
@@ -148,7 +148,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[56]:
+# In[3]:
 
 
 import dask.array as da
@@ -156,37 +156,62 @@ import pandas as pd
 from multiprocessing import Pool
 
 
-# In[94]:
+# In[ ]:
 
 
-#axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
-ll=da.random.randint(1,dd['max']+1,(N,mm))*(-1)**da.random.randint(0,2,(N,mm))
-ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
+size_old=0
+imax=1
+i=0
+df=pd.DataFrame()
+Δ_size=1
+while Δ_size>0:
+    #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
+    ll=da.random.randint(1,dd['max']+1,(N,mm))*(-1)**da.random.randint(0,2,(N,mm))
+    ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
 
-s=time.time()
-ll=ll.compute()
-print('grid → ',time.time()-s,ll.shape)
+    s=time.time()
+    ll=ll.compute()
+    print('grid → ',time.time()-s,ll.shape)
 
-s=time.time()
-pool = Pool(8)
-sls = pool.map(get_solution_from_list,ll)
-pool.close()
-del ll
+    s=time.time()
+    pool = Pool(8)
+    sls = pool.map(get_solution_from_list,ll)
+    pool.close()
+    del ll
 
-sls=[d for d in sls if d]
-print('sols → ',time.time()-s,len(sls))
+    sls=[d for d in sls if d]
+    print('sols → ',time.time()-s,len(sls))
+
+    #Unique solutions
+    df=df.append(  sls,ignore_index=True    )  
+    df.sort_values('gcd')
+    df['zs']=df['z'].astype(str)
+    df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
+    print('unique solutions → ',df.shape)
+    Δ_size=df.size-size_old
+    print(i,Δ_size,df.size,size_old)    
+    if Δ_size>0:
+        size_old=df.size
+    if i>imax:
+        break
+
+    i+=1
 
 
-# Unique solutions
+# 
 
-# In[95]:
+# In[104]:
 
 
-df=pd.DataFrame(sls)
-df.sort_values('gcd')
-df['zs']=df['z'].astype(str)
-df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
-print('unique solutions → ',df.shape)
+#i=0
+i+=1
+i
+
+
+# In[99]:
+
+
+
 
 
 # In[16]:
@@ -265,7 +290,7 @@ sl=pd.read_json('solutions.json')
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[84]:
+# In[96]:
 
 
 sl=sl[sl['n']==7]
@@ -282,6 +307,12 @@ sl.shape
 
 
 s=set()
+
+
+# In[ ]:
+
+
+sl.rename({'solution'})
 
 
 # In[ ]:
