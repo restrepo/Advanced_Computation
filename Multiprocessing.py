@@ -127,7 +127,7 @@ Single=False
 
 # ### Single-processing
 
-# In[15]:
+# In[17]:
 
 
 if Single:
@@ -148,7 +148,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[3]:
+# In[19]:
 
 
 import dask.array as da
@@ -157,7 +157,7 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 
 
-# In[9]:
+# In[ ]:
 
 
 size_old=0
@@ -190,7 +190,6 @@ while Δ_size>0:
     df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
     print('unique solutions → ',df.shape)
     Δ_size=df.shape[0]-size_old
-    print(i,Δ_size,df.shape[0],size_old)    
     if Δ_size>0:
         size_old=df.shape[0]
     if i>imax:
@@ -313,13 +312,22 @@ s=set()
 # In[ ]:
 
 
-sl.rename({'solution'})
+sl.rename({'solution':'z'},axis='columns')
 
 
 # In[ ]:
 
 
-s.d
+sl=sl[['z']].append(df[['z']]).reset_index(drop=True)
+sl['zs']=sl['z'].astype(str)
+sl=sl.drop_duplicates('zs',keep=False).drop('zs',axis='columns').reset_index(drop=True)
+sl.shape
+
+
+# In[ ]:
+
+
+sl
 
 
 # In[14]:
