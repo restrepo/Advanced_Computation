@@ -109,7 +109,7 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 
 d=[{'n':6,'N':4000000,'max':11},
-   {'n':7,'N':50000000,'max':12},
+   {'n':7,'N':50000000,'max':15},
    {'n':8,'N':50000000,'max':10},
    {'n':9,'N':50000000,'max':10},
    {'n':10,'N':50000000,'max':10},
@@ -156,11 +156,11 @@ import pandas as pd
 from multiprocessing import Pool
 
 
-# In[ ]:
+# In[9]:
 
 
 size_old=0
-imax=1
+imax=10
 i=0
 df=pd.DataFrame()
 Δ_size=1
