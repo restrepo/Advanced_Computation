@@ -22,6 +22,7 @@
 
 
 from multiprocessing import Pool
+import time
 
 
 # In[2]:
@@ -34,22 +35,26 @@ def f(x):
 # In[176]:
 
 
-result = [f(x) for x in list(range(100000))]
+N=10000000
+result = [f(x) for x in range(N)]
 
 
 # In[177]:
 
 
 pool = Pool(8)
-result = pool.map(f,list(range(100000)))
+result = pool.map(f,range(N))
 pool.close()
 
 
 # ![img](https://miro.medium.com/max/700/1*n8_M7_0O2Rp3TCuqLDeeHg.png)
 
-# Implementation
+# ## Implementation.
+# * Use the official module to find solutions 
+# * filter the chiral ones  with a maximum integer of 32
+# * Build a function suitable for multiprocessing
 
-# In[3]:
+# In[1]:
 
 
 import numpy as np
@@ -74,14 +79,13 @@ def _get_chiral(q,q_max=np.inf):
     q=(q/GCD).astype(int)
     if ( #not 0 in z and 
           0 not in [ sum(p) for p in itertools.permutations(q, 2) ] and #avoid vector-like and multiple 0's
-          #q.size > np.unique(q).size and # check for at least a duplicated entry
           np.abs(q).max()<=q_max
            ):
         return q,GCD
     else:
         return None,None
     
-def get_solution(l,k,zmax=30):
+def get_solution(l,k,zmax=32):
     q,gcd=_get_chiral( z(l,k) )
     #if q is not None and np.abs(q).max()<=zmax:#
     if q is not None and np.abs(q).max()<=zmax:
@@ -89,7 +93,7 @@ def get_solution(l,k,zmax=30):
     else:
         return {}    
 
-def get_solution_from_list(lk,zmax=30):
+def get_solution_from_list(lk,zmax=32):
     n=len(lk)
     l=lk[:n//2]
     k=lk[n//2:]
@@ -101,18 +105,18 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 # Prepare running
 
-# In[4]:
+# In[93]:
 
 
-d=[{'n':6,'N':300000,'max':7},
-   {'n':7,'N':500000,'max':10},
-   {'n':8,'N':800000,'max':12},
-   {'n':9,'N':700000,'max':12},
-   {'n':10,'N':26000000,'max':12},
-   {'n':11,'N':90000000,'max':12},
-   {'n':12,'N':80000000,'max':12}]
+d=[{'n':6,'N':4000000,'max':11},
+   {'n':7,'N':50000000,'max':11},
+   {'n':8,'N':50000000,'max':10},
+   {'n':9,'N':50000000,'max':10},
+   {'n':10,'N':50000000,'max':10},
+   {'n':11,'N':50000000,'max':10},
+   {'n':12,'N':50000000,'max':10}]
 
-n=6
+n=7
 dd=[dd for dd in d if dd.get('n')==n][0]
 
 N=dd['N'] 
@@ -123,7 +127,7 @@ Single=False
 
 # ### Single-processing
 
-# In[5]:
+# In[55]:
 
 
 if Single:
@@ -144,7 +148,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[6]:
+# In[56]:
 
 
 import dask.array as da
@@ -152,7 +156,7 @@ import pandas as pd
 from multiprocessing import Pool
 
 
-# In[7]:
+# In[94]:
 
 
 #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
@@ -167,6 +171,7 @@ s=time.time()
 pool = Pool(8)
 sls = pool.map(get_solution_from_list,ll)
 pool.close()
+del ll
 
 sls=[d for d in sls if d]
 print('sols → ',time.time()-s,len(sls))
@@ -174,7 +179,7 @@ print('sols → ',time.time()-s,len(sls))
 
 # Unique solutions
 
-# In[10]:
+# In[95]:
 
 
 df=pd.DataFrame(sls)
@@ -182,6 +187,125 @@ df.sort_values('gcd')
 df['zs']=df['z'].astype(str)
 df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 print('unique solutions → ',df.shape)
+
+
+# In[16]:
+
+
+raise Exception('Appendix')
+
+
+# Appendix
+
+# ### Check RAM USAGE
+
+# In[91]:
+
+
+d=[{'n':6,'N':4000000,'max':11},
+   {'n':7,'N':50000000,'max':12},
+   {'n':8,'N':50000000,'max':10},
+   {'n':9,'N':50000000,'max':10},
+   {'n':10,'N':50000000,'max':10},
+   {'n':11,'N':50000000,'max':10},
+   {'n':12,'N':50000000,'max':10}]
+
+n=7
+dd=[dd for dd in d if dd.get('n')==n][0]
+
+N=dd['N'] 
+mm=n-2
+
+Single=False
+
+
+# In[92]:
+
+
+for i in range(2):
+    print(i)
+    #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
+    ll=da.random.randint(1,dd['max']+1,(N,mm))*(-1)**da.random.randint(0,2,(N,mm))
+    ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
+
+    s=time.time()
+    ll=ll.compute()
+    
+    if i==0:    
+        f=open('ll.npy','wb')
+        np.save(f,ll)
+        f.close()    
+
+    if i==1:
+        print('→',i)
+        with open('ll.npy', 'rb') as f:
+            ll_old = np.load(f)
+        
+        #WARNING: Not multiprocessing
+        ll=pd.DataFrame(np.concatenate((ll,np.zeros((1,mm)).astype(int),ll_old))).drop_duplicates(keep=False).reset_index(drop=True)
+        ll=ll[:ll[(ll[0]==0) &  (ll[mm-1]==0)].index[0]].values    
+    
+
+    print('grid → ',time.time()-s,ll.shape)
+    
+
+
+# ### Check number of silutions
+
+# In[82]:
+
+
+sl=pd.read_json('solutions.json')
+
+
+# In[83]:
+
+
+#sl['zs']=sl['solution'].astype(str)
+#sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
+
+
+# In[84]:
+
+
+sl=sl[sl['n']==7]
+sl.shape
+
+
+# In[85]:
+
+
+(sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
+
+
+# In[92]:
+
+
+s=set()
+
+
+# In[ ]:
+
+
+s.d
+
+
+# In[14]:
+
+
+{ tuple(x) for x in sl['solution'].to_list() }.difference( { tuple(x) for x in df['z'].to_list() }  )
+
+
+# In[15]:
+
+
+{ tuple(x) for x in df['z'].to_list() }.difference( { tuple(x) for x in sl['solution'].to_list() }  )
+
+
+# In[99]:
+
+
+df['z'].apply(lambda l:np.abs(l).max()).max()
 
 
 # In[ ]:
