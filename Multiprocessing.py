@@ -188,10 +188,10 @@ while Δ_size>0:
     df['zs']=df['z'].astype(str)
     df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
     print('unique solutions → ',df.shape)
-    Δ_size=df.size-size_old
-    print(i,Δ_size,df.size,size_old)    
+    Δ_size=df.shape[0]-size_old
+    print(i,Δ_size,df.shape[0],size_old)    
     if Δ_size>0:
-        size_old=df.size
+        size_old=df.shape[0]
     if i>imax:
         break
 
