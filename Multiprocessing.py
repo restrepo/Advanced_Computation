@@ -54,7 +54,7 @@ pool.close()
 # * filter the chiral ones  with a maximum integer of 32
 # * Build a function suitable for multiprocessing
 
-# In[1]:
+# In[3]:
 
 
 import numpy as np
@@ -105,18 +105,18 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 # Prepare running
 
-# In[2]:
+# In[64]:
 
 
-d=[{'n':6,'N':4000000,'max':11},
-   {'n':7,'N':50000000,'max':15},
-   {'n':8,'N':50000000,'max':10},
-   {'n':9,'N':50000000,'max':10},
-   {'n':10,'N':50000000,'max':10},
-   {'n':11,'N':50000000,'max':10},
-   {'n':12,'N':50000000,'max':10}]
+d=[{'n':6,'N':4000000,'max':11,'imax':0},
+   {'n':7,'N':50000000,'max':15,'imax':10},
+   {'n':8,'N':50000000,'max':10,'imax':10},
+   {'n':9,'N':50000000,'max':10,'imax':10},
+   {'n':10,'N':50000000,'max':10,'imax':10},
+   {'n':11,'N':50000000,'max':10,'imax':10},
+   {'n':12,'N':50000000,'max':10,'imax':10}]
 
-n=7
+n=6
 dd=[dd for dd in d if dd.get('n')==n][0]
 
 N=dd['N'] 
@@ -132,7 +132,7 @@ Single=False
 
 if Single:
     s=time.time()
-    ll=np.random.randint(1,dd['max']+1,(N,mm))*(-1)**np.random.randint(0,2,(N,mm))
+    ll=np.random.randint(-dd['max'],dd['max']+1,(N,mm))
     ll=np.unique(ll, axis=0)
     print('grid → ',time.time()-s,ll.shape)
 
@@ -148,7 +148,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[19]:
+# In[65]:
 
 
 import dask.array as da
@@ -157,20 +157,22 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 
 
-# In[20]:
+# In[67]:
 
 
 size_old=0
-imax=10
+imax=dd['imax']
 i=0
 df=pd.DataFrame()
 Δ_size=1
 while Δ_size>0:
     #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
-    ll=da.random.randint(1,dd['max']+1,(N,mm))*(-1)**da.random.randint(0,2,(N,mm))
+    ll=da.random.randint(-dd['max'],dd['max']+1,(N,mm))
     ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
 
     s=time.time()
+    #See: https://docs.dask.org/en/stable/scheduler-overview.html#configuring-the-schedulers
+    #.compute(num_workers=XX) → defaults to number of cores
     ll=ll.compute()
     print('grid → ',time.time()-s,ll.shape)
 
@@ -192,10 +194,16 @@ while Δ_size>0:
     Δ_size=df.shape[0]-size_old
     if Δ_size>0:
         size_old=df.shape[0]
-    if i>imax:
+    if i>=imax:
         break
 
     i+=1
+
+
+# In[69]:
+
+
+df.to_json(f'solution_{n}.json',orient='records')
 
 
 # In[16]:
@@ -208,10 +216,10 @@ raise Exception('Appendix')
 
 # ### Check RAM USAGE
 
-# In[91]:
+# In[57]:
 
 
-d=[{'n':6,'N':4000000,'max':11},
+d=[{'n':6,'N':4000000,'max':11}, #'N':4000000,'max':11
    {'n':7,'N':50000000,'max':12},
    {'n':8,'N':50000000,'max':10},
    {'n':9,'N':50000000,'max':10},
@@ -228,13 +236,13 @@ mm=n-2
 Single=False
 
 
-# In[92]:
+# In[60]:
 
 
 for i in range(2):
     print(i)
     #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
-    ll=da.random.randint(1,dd['max']+1,(N,mm))*(-1)**da.random.randint(0,2,(N,mm))
+    ll=da.random.randint(-dd['max'],dd['max']+1,(N,mm))
     ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
 
     s=time.time()
@@ -251,58 +259,80 @@ for i in range(2):
             ll_old = np.load(f)
         
         #WARNING: Not multiprocessing
-        ll=pd.DataFrame(np.concatenate((ll,np.zeros((1,mm)).astype(int),ll_old))).drop_duplicates(keep=False).reset_index(drop=True)
-        ll=ll[:ll[(ll[0]==0) &  (ll[mm-1]==0)].index[0]].values    
+        ll=pd.DataFrame(np.concatenate((ll,
+                                        (np.ones((1,mm))*(dd['max']+1)).astype(int), #introduce separator
+                                        ll_old)
+                                      )).drop_duplicates(keep=False).reset_index(drop=True)
+        ll=ll[:ll[(ll[0]==dd['max']+1) &  (ll[mm-1]==dd['max']+1)].index[0]].values    
     
 
     print('grid → ',time.time()-s,ll.shape)
     
 
 
-# ### Check number of silutions
+# In[36]:
 
-# In[33]:
+
+ll[[0 in x for x in ll]]
+
+
+# In[28]:
+
+
+
+
+
+# ### Check number of silutions
+# From: https://doi.org/10.5281/zenodo.5526707
+
+# In[53]:
 
 
 sl=pd.read_json('solutions.json')
 
 
-# In[34]:
+# In[54]:
 
 
 #sl['zs']=sl['solution'].astype(str)
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[35]:
+# In[56]:
 
 
-sl=sl[sl['n']==8]
+sl=sl[sl['n']==6]
 sl.shape
 
 
-# In[36]:
+# In[ ]:
+
+
+5569
+
+
+# In[40]:
 
 
 (sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
 
 
-# In[26]:
+# In[47]:
 
 
 sl=sl.rename({'solution':'z'},axis='columns')
 
 
-# In[27]:
+# In[48]:
 
 
-sl=sl[['z']].append(df[['z']]).reset_index(drop=True)
+sl=sl.append(df).reset_index(drop=True)
 sl['zs']=sl['z'].astype(str)
 sl=sl.drop_duplicates('zs',keep=False).drop('zs',axis='columns').reset_index(drop=True)
 sl.shape
 
 
-# In[28]:
+# In[49]:
 
 
 sl
@@ -324,6 +354,24 @@ sl
 
 
 df['z'].apply(lambda l:np.abs(l).max()).max()
+
+
+# In[37]:
+
+
+[8, 9, 11, -17, -17, -17, 23]==[8, 9, 11, -17, -17, -17, 23]
+
+
+# In[ ]:
+
+
+import numpy as np
+
+
+# In[15]:
+
+
+np.unique( np.random.randint(-2,3,(200,2)),axis=0 )
 
 
 # In[ ]:
