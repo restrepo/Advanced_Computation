@@ -127,7 +127,7 @@ Single=False
 
 # ### Single-processing
 
-# In[55]:
+# In[15]:
 
 
 if Single:
@@ -154,6 +154,7 @@ if Single:
 import dask.array as da
 import pandas as pd
 from multiprocessing import Pool
+from multiprocessing import cpu_count
 
 
 # In[9]:
@@ -174,7 +175,7 @@ while Δ_size>0:
     print('grid → ',time.time()-s,ll.shape)
 
     s=time.time()
-    pool = Pool(8)
+    pool = Pool(cpu_count())
     sls = pool.map(get_solution_from_list,ll)
     pool.close()
     del ll
