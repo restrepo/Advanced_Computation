@@ -22,6 +22,7 @@
 
 
 from multiprocessing import Pool
+from multiprocessing import cpu_count
 import time
 
 
@@ -32,29 +33,62 @@ def f(x):
     return x**2
 
 
-# In[176]:
+# In[60]:
 
 
-N=100000#00
+s=time.time()
+N=10#000000 
 result = [f(x) for x in range(N)]
+print(time.time()-s)
 
 
-# In[177]:
+# WARNING: 
+
+# In[61]:
 
 
-pool = Pool(8)
+s=time.time()
+pool = Pool(cpu_count())
 result = pool.map(f,range(N))
 pool.close()
+print(time.time()-s)
+LAZY=False
 
 
-# ![img](https://miro.medium.com/max/700/1*n8_M7_0O2Rp3TCuqLDeeHg.png)
+# In[62]:
+
+
+if LAZY:
+    s=time.time()
+    pool = Pool(cpu_count())
+    result=[]
+    result=[ r for r in pool.imap(f,range(N),chunksize=N//cpu_count())]
+    pool.close()
+    print(time.time()-s,result[:10])
+
+
+# In[63]:
+
+
+if LAZY:
+    result=[]
+    s=time.time()
+    pool = Pool(cpu_count())
+    result=[r for r in pool.imap_unordered(f,range(N),chunksize=N//cpu_count())]
+    pool.close()
+    print(time.time()-s,result[:10])
+
+
+# ![img](https://miro.medium.com/max/700/1*n8_M7_0O2Rp3TCuqLDeeHg.png)chunksize=
 
 # ## Implementation.
 # * Use the official module to find solutions 
 # * filter the chiral ones  with a maximum integer of 32
 # * Build a function suitable for multiprocessing
 
-# In[1]:
+# ### Functions
+
+# In[53]:
 
 
 import numpy as np
@@ -103,20 +137,20 @@ def get_solution_from_list(lk,zmax=32):
 assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 
-# Prepare running
+# ### Prepare running
 
-# In[2]:
+# In[56]:
 
 
 d=[{'n':6,'N':4000000,'max':11,'imax':0},
    {'n':7,'N':8000000,'max':13,'imax':0},
-   {'n':8,'N':50000000,'max':10,'imax':10},
-   {'n':9,'N':50000000,'max':10,'imax':10},
-   {'n':10,'N':50000000,'max':10,'imax':10},
-   {'n':11,'N':50000000,'max':10,'imax':10},
-   {'n':12,'N':50000000,'max':10,'imax':10}]
+   {'n':8,'N':50000000,'max':15,'imax':10},
+   {'n':9,'N':50000000,'max':10,'imax':40},
+   {'n':10,'N':70000000,'max':10,'imax':100},
+   {'n':11,'N':50000000,'max':10,'imax':100},
+   {'n':12,'N':50000000,'max':10,'imax':100}]
 
-n=6
+n=7
 dd=[dd for dd in d if dd.get('n')==n][0]
 
 N=dd['N'] 
@@ -148,7 +182,7 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[3]:
+# In[55]:
 
 
 import dask.array as da
@@ -157,7 +191,7 @@ from multiprocessing import Pool
 from multiprocessing import cpu_count
 
 
-# In[4]:
+# In[58]:
 
 
 size_old=0
@@ -178,7 +212,10 @@ while Δ_size>0:
 
     s=time.time()
     pool = Pool(cpu_count())
-    sls = pool.map(get_solution_from_list,ll)
+    if not UNORDERED:
+        sls = pool.map(get_solution_from_list,ll)
+    else:
+        sls=[r for r in pool.imap_unordered(get_solution_from_list,ll,chunksize=len(ll)//cpu_count())]
     pool.close()
     del ll
 
@@ -212,7 +249,7 @@ df.to_json(f'solution_{n}.json',orient='records')
 raise Exception('Appendix')
 
 
-# Appendix
+# ## Appendix
 
 # ### Check RAM USAGE
 
@@ -282,27 +319,52 @@ ll[[0 in x for x in ll]]
 
 
 
-# ### Check number of silutions
+# ### Check number of solutions
 # From: https://doi.org/10.5281/zenodo.5526707
 
-# In[7]:
+# In[26]:
+
+
+df=pd.read_json('solution_8.json')
+
+
+# In[27]:
+
+
+df.shape
+
+
+# In[28]:
+
+
+import pandas as pd
+import numpy as np
+
+
+# In[33]:
 
 
 sl=pd.read_json('solutions.json')
 
 
-# In[74]:
+# In[34]:
 
 
 #sl['zs']=sl['solution'].astype(str)
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[8]:
+# In[35]:
 
 
-sl=sl[sl['n']==6]
+sl=sl[sl['n']==10]
 sl.shape
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
@@ -311,31 +373,73 @@ sl.shape
 5569
 
 
-# In[76]:
+# In[14]:
 
 
 (sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
 
 
-# In[47]:
+# In[22]:
 
 
 sl=sl.rename({'solution':'z'},axis='columns')
 
 
-# In[48]:
+# In[25]:
 
 
-sl=sl.append(df).reset_index(drop=True)
+sl=pd.concat((sl,df)).reset_index(drop=True)
 sl['zs']=sl['z'].astype(str)
 sl=sl.drop_duplicates('zs',keep=False).drop('zs',axis='columns').reset_index(drop=True)
 sl.shape
 
 
-# In[49]:
+# In[34]:
+
+
+df[:3]
+
+
+# In[40]:
+
+
+#sl.to_json('missing_8.json',orient='records')
+
+
+# In[44]:
 
 
 sl
+
+
+# In[54]:
+
+
+sl[sl['solution'].astype(str)=='[19, -22, -22, 27, 27, -28, 31, -32]']
+
+
+# In[36]:
+
+
+sl['l'].iloc[3]
+
+
+# In[37]:
+
+
+get_solution_from_list( (sl['l']+sl['k']).iloc[3] )
+
+
+# In[32]:
+
+
+get_solution(sl['l'].iloc[0],sl['k'].iloc[0])
+
+
+# In[33]:
+
+
+z(sl['l'].iloc[0],sl['k'].iloc[0])
 
 
 # In[29]:
@@ -372,6 +476,42 @@ import numpy as np
 
 
 np.unique( np.random.randint(-2,3,(200,2)),axis=0 )
+
+
+# In[5]:
+
+
+import numpy as np
+
+
+# In[6]:
+
+
+import pandas as pd
+
+
+# In[7]:
+
+
+df=pd.read_json('/home/restrepo/Downloads/solution_6.json')
+
+
+# In[25]:
+
+
+df[df[6].apply(lambda l: np.abs(l).max())<=32].shape
+
+
+# In[37]:
+
+
+p=Pool()
+
+
+# In[38]:
+
+
+get_ipython().run_line_magic('pinfo', 'p.map_async')
 
 
 # In[ ]:
