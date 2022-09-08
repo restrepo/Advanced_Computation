@@ -1,0 +1,1650 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiprocessing &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="GitHub Action for DevOps" href="DevOps.html" />
+    <link rel="prev" title="Markdown Files" href="markdown.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multiprocessing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="DevOps.html">
+   GitHub Action for DevOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Multiprocessing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMultiprocessing.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/Multiprocessing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiprocessing-in-python">
+   Multiprocessing in Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       multiprocessing
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions">
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prepare-running">
+     Prepare running
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-processing">
+     Single-processing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Multiprocessing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix">
+   Appendix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-ram-usage">
+     Check RAM USAGE
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-number-of-solutions">
+     Check number of solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Multiprocessing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiprocessing-in-python">
+   Multiprocessing in Python
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       multiprocessing
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementation">
+   Implementation.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#functions">
+     Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prepare-running">
+     Prepare running
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-processing">
+     Single-processing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Multiprocessing
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix">
+   Appendix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-ram-usage">
+     Check RAM USAGE
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-number-of-solutions">
+     Check number of solutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="multiprocessing">
+<h1>Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div><p>Multiprocessing refers to the ability of a system to support more than one processor at the same time. Applications in a multiprocessing system are broken to smaller routines that run independently. The operating system allocates these threads to the processors improving performance of the system.</p>
+</div></blockquote>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/multiprocessing-python-set-1/">https://www.geeksforgeeks.org/multiprocessing-python-set-1/</a></p>
+<div class="section" id="multiprocessing-in-python">
+<h2>Multiprocessing in Python<a class="headerlink" href="#multiprocessing-in-python" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> for a single node with several cores</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joblib</span></code> also works in distruibuted nodes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dask</span></code> for arrays in distruibuted nodes</p></li>
+</ul>
+<div class="section" id="id1">
+<h3><code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>Example</p>
+<p>See: <a class="reference external" href="https://towardsdatascience.com/how-can-data-scientists-use-parallel-processing-17194fffc6d0">https://towardsdatascience.com/how-can-data-scientists-use-parallel-processing-17194fffc6d0</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">10</span><span class="c1">#000000 </span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.5549304485321045
+</pre></div>
+</div>
+</div>
+</div>
+<p>WARNING: Take care of the RAM for large N</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="c1">#equivalent to %%time</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">LAZY</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.58 → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">LAZY</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+    <span class="n">result</span><span class="o">=</span><span class="n">pool</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="c1">#,chunksize=N//cpu_count())</span>
+    <span class="n">result</span><span class="o">=</span><span class="p">[</span> <span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="p">]</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.19 → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">LAZY</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+    <span class="n">result</span><span class="o">=</span><span class="p">[</span> <span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">chunksize</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="n">cpu_count</span><span class="p">())]</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.22 → [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">LAZY</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+    <span class="n">result</span><span class="o">=</span><span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">pool</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span><span class="n">chunksize</span><span class="o">=</span><span class="n">N</span><span class="o">//</span><span class="n">cpu_count</span><span class="p">())]</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.31 → [4, 1, 9, 64, 25, 16, 0, 49, 36, 81]
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="img" src="https://miro.medium.com/max/700/1*n8_M7_0O2Rp3TCuqLDeeHg.png" />chunksize=</p>
+</div>
+</div>
+<div class="section" id="implementation">
+<h2>Implementation.<a class="headerlink" href="#implementation" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Use the official module to find solutions</p></li>
+<li><p>filter the chiral ones  with a maximum integer of 32</p></li>
+<li><p>Build a function suitable for multiprocessing</p></li>
+</ul>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">anomalies</span> <span class="kn">import</span> <span class="n">anomaly</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="n">z</span><span class="o">=</span><span class="n">anomaly</span><span class="o">.</span><span class="n">free</span>
+
+<span class="k">def</span> <span class="nf">_get_chiral</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+    <span class="c1">#Normalize to positive minimum</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
+    <span class="k">if</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">q</span><span class="o">=-</span><span class="n">q</span>
+    <span class="c1">#Divide by GCD</span>
+    <span class="n">GCD</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">gcd</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">q</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="o">/</span><span class="n">GCD</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="c1">#not 0 in z and </span>
+          <span class="mi">0</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span> <span class="nb">sum</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="p">]</span> <span class="ow">and</span> <span class="c1">#avoid vector-like and multiple 0&#39;s</span>
+          <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">&lt;=</span><span class="n">q_max</span>
+           <span class="p">):</span>
+        <span class="k">return</span> <span class="n">q</span><span class="p">,</span><span class="n">GCD</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
+    
+<span class="k">def</span> <span class="nf">get_solution</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">zmax</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">q</span><span class="p">,</span><span class="n">gcd</span><span class="o">=</span><span class="n">_get_chiral</span><span class="p">(</span> <span class="n">z</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="p">)</span>
+    <span class="c1">#if q is not None and np.abs(q).max()&lt;=zmax:#</span>
+    <span class="k">if</span> <span class="n">q</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">&lt;=</span><span class="n">zmax</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;l&#39;</span><span class="p">:</span><span class="n">l</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">:</span><span class="n">k</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">q</span><span class="p">),</span><span class="s1">&#39;gcd&#39;</span><span class="p">:</span><span class="n">gcd</span><span class="p">}</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>    
+
+<span class="k">def</span> <span class="nf">get_solution_from_list</span><span class="p">(</span><span class="n">lk</span><span class="p">,</span><span class="n">zmax</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">lk</span><span class="p">)</span>
+    <span class="n">l</span><span class="o">=</span><span class="n">lk</span><span class="p">[:</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">k</span><span class="o">=</span><span class="n">lk</span><span class="p">[</span><span class="n">n</span><span class="o">//</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">get_solution</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">zmax</span><span class="p">)</span>
+
+
+<span class="k">assert</span> <span class="n">get_solution_from_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">==</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="prepare-running">
+<h3>Prepare running<a class="headerlink" href="#prepare-running" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">4000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">8000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">10000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">70000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">}]</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">8</span>
+<span class="n">dd</span><span class="o">=</span><span class="p">[</span><span class="n">dd</span> <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">if</span> <span class="n">dd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span><span class="o">==</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">N</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> 
+<span class="n">mm</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span>
+
+<span class="n">Single</span><span class="o">=</span><span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="single-processing">
+<h3>Single-processing<a class="headerlink" href="#single-processing" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">Single</span><span class="p">:</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">N</span><span class="p">,</span><span class="n">mm</span><span class="p">))</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ll</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grid → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="n">ll</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">sls</span><span class="o">=</span><span class="p">[</span><span class="n">get_solution_from_list</span><span class="p">(</span><span class="n">lk</span><span class="p">)</span> <span class="k">for</span> <span class="n">lk</span> <span class="ow">in</span> <span class="n">ll</span> <span class="k">if</span> <span class="n">get_solution_from_list</span><span class="p">(</span><span class="n">lk</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sols → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">))</span>
+    <span class="k">del</span> <span class="n">ll</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grid →  105.63711500167847 (7947827, 5)
+sols →  499.27395939826965 103363
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Multiprocessing<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>After</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3 install dask<span class="o">[</span>complete<span class="o">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dask.array</span> <span class="k">as</span> <span class="nn">da</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#UNORDERED=False</span>
+<span class="n">RELOAD</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">size_old</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">imax</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;imax&#39;</span><span class="p">]</span>
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">Δ_size</span><span class="o">=</span><span class="mi">1</span> <span class="c1">#Any non-zero value</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">RELOAD</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span>
+
+<span class="c1">#to save solutions in the middle of the next while</span>
+<span class="n">rc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10000</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="k">while</span> <span class="n">Δ_size</span><span class="o">&gt;-</span><span class="mi">10</span><span class="p">:</span>
+    <span class="c1">#axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">N</span><span class="p">,</span><span class="n">mm</span><span class="p">))</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="o">.</span><span class="n">to_dask_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">to_dask_array</span><span class="p">()</span>
+
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="c1">#See: https://docs.dask.org/en/stable/scheduler-overview.html#configuring-the-schedulers</span>
+    <span class="c1">#.compute(num_workers=XX) → defaults to number of cores</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grid → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="n">ll</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">cpu_count</span><span class="p">())</span>
+    <span class="k">if</span> <span class="kc">True</span><span class="p">:</span><span class="c1"># not UNORDERED:</span>
+        <span class="n">sls</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_solution_from_list</span><span class="p">,</span><span class="n">ll</span><span class="p">)</span>
+    <span class="c1">#else:</span>
+    <span class="c1">#    sls=[r for r in pool.imap_unordered(get_solution_from_list,ll,chunksize=len(ll)//cpu_count())]</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">del</span> <span class="n">ll</span>
+
+    <span class="n">sls</span><span class="o">=</span><span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">sls</span> <span class="k">if</span> <span class="n">d</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sols → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">))</span>
+
+    <span class="c1">#Unique solutions</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  <span class="n">sls</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>    <span class="p">)</span>  
+    <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;gcd&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unique solutions → &#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">Δ_size</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">size_old</span>
+    <span class="k">if</span> <span class="n">Δ_size</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">size_old</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">imax</span><span class="p">:</span>
+        <span class="k">break</span>
+
+    <span class="n">Δrc</span><span class="o">=</span><span class="p">(</span><span class="n">rc</span><span class="o">-</span><span class="n">Δ_size</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span> <span class="n">Δrc</span> <span class="p">):</span>
+        <span class="n">rc</span><span class="o">=</span><span class="n">rc</span><span class="p">[</span><span class="o">~</span><span class="n">Δrc</span><span class="p">]</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+        
+    <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grid →  5.125827312469482 (9943660, 6)
+sols →  235.3358874320984 31329
+unique solutions →  (5561, 4)
+grid →  4.615612506866455 (9943763, 6)
+sols →  249.46075701713562 31397
+unique solutions →  (5561, 4)
+grid →  2.8832478523254395 (9944137, 6)
+sols →  235.53420209884644 31287
+unique solutions →  (5561, 4)
+grid →  3.0855963230133057 (9943711, 6)
+sols →  243.22560095787048 31188
+unique solutions →  (5562, 4)
+grid →  2.8208534717559814 (9944154, 6)
+sols →  235.83095002174377 31435
+unique solutions →  (5562, 4)
+grid →  2.807673454284668 (9944126, 6)
+sols →  238.9873764514923 31436
+unique solutions →  (5563, 4)
+grid →  3.0656003952026367 (9943932, 6)
+sols →  250.44887709617615 31308
+unique solutions →  (5563, 4)
+grid →  2.8732268810272217 (9944217, 6)
+sols →  232.83498787879944 31570
+unique solutions →  (5563, 4)
+grid →  2.933765172958374 (9944005, 6)
+sols →  236.1282036304474 30953
+unique solutions →  (5563, 4)
+grid →  3.018436908721924 (9944162, 6)
+sols →  236.7464816570282 31516
+unique solutions →  (5563, 4)
+grid →  2.9463958740234375 (9943848, 6)
+sols →  236.39624881744385 31236
+unique solutions →  (5563, 4)
+grid →  3.153019428253174 (9944251, 6)
+sols →  234.9236352443695 30984
+unique solutions →  (5564, 4)
+grid →  3.079587459564209 (9943763, 6)
+sols →  234.79861688613892 31238
+unique solutions →  (5565, 4)
+grid →  2.843123197555542 (9944035, 6)
+sols →  232.95108604431152 31249
+unique solutions →  (5565, 4)
+grid →  3.0113396644592285 (9944176, 6)
+sols →  235.37753343582153 31398
+unique solutions →  (5565, 4)
+grid →  2.9753401279449463 (9943992, 6)
+sols →  234.0845968723297 31214
+unique solutions →  (5565, 4)
+grid →  3.163233518600464 (9944069, 6)
+sols →  234.7974934577942 31193
+unique solutions →  (5565, 4)
+grid →  3.0052075386047363 (9943654, 6)
+sols →  231.9148633480072 30958
+unique solutions →  (5565, 4)
+grid →  3.0588748455047607 (9944128, 6)
+sols →  233.0326690673828 31344
+unique solutions →  (5565, 4)
+grid →  2.9383530616760254 (9943796, 6)
+sols →  232.5432891845703 31326
+unique solutions →  (5565, 4)
+grid →  3.0677568912506104 (9943535, 6)
+sols →  234.60766315460205 31282
+unique solutions →  (5565, 4)
+grid →  2.9189393520355225 (9943522, 6)
+sols →  234.59891867637634 31412
+unique solutions →  (5565, 4)
+grid →  3.012995481491089 (9943774, 6)
+sols →  234.3944854736328 31150
+unique solutions →  (5565, 4)
+grid →  2.970838785171509 (9943836, 6)
+sols →  234.68983054161072 31270
+unique solutions →  (5565, 4)
+grid →  2.779820203781128 (9944059, 6)
+sols →  234.89645051956177 31269
+unique solutions →  (5565, 4)
+grid →  2.8214123249053955 (9943484, 6)
+sols →  234.85264611244202 30739
+unique solutions →  (5565, 4)
+grid →  2.7817635536193848 (9943975, 6)
+sols →  233.03124380111694 31361
+unique solutions →  (5565, 4)
+grid →  3.1972877979278564 (9943942, 6)
+sols →  232.17127180099487 31242
+unique solutions →  (5565, 4)
+grid →  2.8146767616271973 (9944250, 6)
+sols →  233.79870772361755 31208
+unique solutions →  (5565, 4)
+grid →  2.7301669120788574 (9944146, 6)
+sols →  234.60717105865479 31353
+unique solutions →  (5565, 4)
+grid →  2.9615120887756348 (9944161, 6)
+sols →  235.61880111694336 31748
+unique solutions →  (5565, 4)
+grid →  3.079838991165161 (9943360, 6)
+sols →  232.55025601387024 31445
+unique solutions →  (5565, 4)
+grid →  2.852166175842285 (9944045, 6)
+sols →  234.37282347679138 31244
+unique solutions →  (5565, 4)
+grid →  2.885488748550415 (9943699, 6)
+sols →  231.5155050754547 31382
+unique solutions →  (5565, 4)
+grid →  2.859386682510376 (9944477, 6)
+sols →  234.13922953605652 31031
+unique solutions →  (5565, 4)
+grid →  2.94732928276062 (9943963, 6)
+sols →  233.53912138938904 31288
+unique solutions →  (5565, 4)
+grid →  2.957282543182373 (9943907, 6)
+sols →  236.17880368232727 31442
+unique solutions →  (5565, 4)
+grid →  2.8946468830108643 (9943888, 6)
+sols →  233.7701222896576 31165
+unique solutions →  (5565, 4)
+grid →  2.9861183166503906 (9944197, 6)
+sols →  233.86081719398499 31224
+unique solutions →  (5565, 4)
+grid →  2.893352746963501 (9944009, 6)
+sols →  235.97558736801147 31118
+unique solutions →  (5565, 4)
+grid →  3.036966562271118 (9943882, 6)
+sols →  233.1707785129547 31435
+unique solutions →  (5565, 4)
+grid →  2.9913322925567627 (9944138, 6)
+sols →  234.94146990776062 31144
+unique solutions →  (5565, 4)
+grid →  3.0504446029663086 (9944111, 6)
+sols →  233.19139504432678 31299
+unique solutions →  (5565, 4)
+grid →  3.0444114208221436 (9943618, 6)
+sols →  232.1016616821289 31486
+unique solutions →  (5565, 4)
+grid →  2.915519952774048 (9943783, 6)
+sols →  234.5119707584381 31309
+unique solutions →  (5565, 4)
+grid →  3.0405685901641846 (9943740, 6)
+sols →  242.87305307388306 31339
+unique solutions →  (5565, 4)
+grid →  2.939229726791382 (9944132, 6)
+sols →  235.47705054283142 31073
+unique solutions →  (5565, 4)
+grid →  2.864549160003662 (9943809, 6)
+sols →  241.6080710887909 31305
+unique solutions →  (5565, 4)
+grid →  3.0425972938537598 (9943976, 6)
+sols →  244.1886444091797 31371
+unique solutions →  (5565, 4)
+grid →  2.928391695022583 (9944439, 6)
+sols →  236.60279369354248 31311
+unique solutions →  (5565, 4)
+grid →  3.030250072479248 (9943734, 6)
+sols →  236.65964579582214 31487
+unique solutions →  (5565, 4)
+grid →  2.7681233882904053 (9943979, 6)
+sols →  238.6981828212738 31494
+unique solutions →  (5565, 4)
+grid →  2.939939260482788 (9943845, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Appendix&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">Exception</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_121696</span><span class="o">/</span><span class="mf">76697970.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Appendix&#39;</span><span class="p">)</span>
+
+<span class="ne">Exception</span>: Appendix
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">#</a></h2>
+<div class="section" id="check-ram-usage">
+<h3>Check RAM USAGE<a class="headerlink" href="#check-ram-usage" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">4000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">},</span> <span class="c1">#&#39;N&#39;:4000000,&#39;max&#39;:11</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">}]</span>
+
+<span class="n">n</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">dd</span><span class="o">=</span><span class="p">[</span><span class="n">dd</span> <span class="k">for</span> <span class="n">dd</span> <span class="ow">in</span> <span class="n">d</span> <span class="k">if</span> <span class="n">dd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span><span class="o">==</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">N</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> 
+<span class="n">mm</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span>
+
+<span class="n">Single</span><span class="o">=</span><span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="c1">#axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">N</span><span class="p">,</span><span class="n">mm</span><span class="p">))</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="o">.</span><span class="n">to_dask_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">to_dask_array</span><span class="p">()</span>
+
+    <span class="n">s</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>    
+        <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ll.npy&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">ll</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>    
+
+    <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ll.npy&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">ll_old</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        
+        <span class="c1">#WARNING: Not multiprocessing</span>
+        <span class="n">ll</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">ll</span><span class="p">,</span>
+                                        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">mm</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span> <span class="c1">#introduce separator</span>
+                                        <span class="n">ll_old</span><span class="p">)</span>
+                                      <span class="p">))</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="p">[:</span><span class="n">ll</span><span class="p">[(</span><span class="n">ll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span>  <span class="p">(</span><span class="n">ll</span><span class="p">[</span><span class="n">mm</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>    
+    
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;grid → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="n">ll</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+grid →  9.36429476737976 (9707449, 5)
+1
+→ 1
+grid →  11.500483989715576 (57840, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ll</span><span class="p">[[</span><span class="mi">0</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ll</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 10,   1,  -3,   0],
+       [ -4,  -5,   0,  -2],
+       [  0,  -1,  -7, -10],
+       ...,
+       [  7,  11,  -9,   0],
+       [  0,  -1, -11, -11],
+       [ -5, -11,   0,  -6]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="check-number-of-solutions">
+<h3>Check number of solutions<a class="headerlink" href="#check-number-of-solutions" title="Permalink to this headline">#</a></h3>
+<p>From: <a class="reference external" href="https://doi.org/10.5281/zenodo.5526707">https://doi.org/10.5281/zenodo.5526707</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;solution_8.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5561, 4)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;solutions.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sl[&#39;zs&#39;]=sl[&#39;solution&#39;].astype(str)</span>
+<span class="c1">#sl=sl.drop_duplicates(&#39;zs&#39;).drop(&#39;zs&#39;,axis=&#39;columns&#39;).reset_index(drop=True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5569, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">5569</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;solution&#39;</span><span class="p">:</span><span class="s1">&#39;z&#39;</span><span class="p">},</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">sl</span><span class="p">,</span><span class="n">df</span><span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sl</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8, 5)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>l</th>
+      <th>k</th>
+      <th>z</th>
+      <th>gcd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[3, 1, 2]</td>
+      <td>[12, 6, -12]</td>
+      <td>[2, 5, 8, -17, 19, -20, -23, 26]</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[3, 4, -8]</td>
+      <td>[12, -12, 6]</td>
+      <td>[1, 7, 10, -22, -25, 28, -31, 32]</td>
+      <td>216</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[-8, 7, -3]</td>
+      <td>[-7, 5, -7]</td>
+      <td>[1, -2, -4, 7, 8, -11, -13, 14]</td>
+      <td>315</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#sl.to_json(&#39;missing_8.json&#39;,orient=&#39;records&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>l</th>
+      <th>k</th>
+      <th>z</th>
+      <th>gcd</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[7, -8, -5]</td>
+      <td>[-3, -6, -1, -5]</td>
+      <td>[2, 7, 7, -22, -22, -22, 25, 25]</td>
+      <td>50</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[4, -7, -3]</td>
+      <td>[-1, -4, 5, 3]</td>
+      <td>[9, -13, -16, -16, 19, 19, 25, -27]</td>
+      <td>28</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[6, -4, 4]</td>
+      <td>[-6, -3, 6, 0]</td>
+      <td>[13, -17, -17, 23, 27, 27, -28, -28]</td>
+      <td>144</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[-12, -3, -12]</td>
+      <td>[-12, -8, -4]</td>
+      <td>[10, -13, -19, 22, -23, 27, 27, -31]</td>
+      <td>1296</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[-9, 8, 5]</td>
+      <td>[-1, 3, -2, -4]</td>
+      <td>[9, -13, -19, 27, 29, 31, -32, -32]</td>
+      <td>6</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>[-12, 4, 12]</td>
+      <td>[-12, -6, 3]</td>
+      <td>[5, 7, 7, -23, -29, -31, 32, 32]</td>
+      <td>864</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>[14, 7, 14]</td>
+      <td>[-11, -5, -11]</td>
+      <td>[11, -14, -14, 20, 23, -29, -29, 32]</td>
+      <td>294</td>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>[-3, -12, -15]</td>
+      <td>[-3, -2, 4]</td>
+      <td>[19, -22, -22, 27, 27, -28, 31, -32]</td>
+      <td>72</td>
+      <td>8.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;solution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">==</span><span class="s1">&#39;[19, -22, -22, 27, 27, -28, 31, -32]&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>l</th>
+      <th>k</th>
+      <th>solution</th>
+      <th>gcd</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6480</th>
+      <td>[-3, -12, -15]</td>
+      <td>[-3, -2, 4]</td>
+      <td>[19, -22, -22, 27, 27, -28, 31, -32]</td>
+      <td>72</td>
+      <td>8</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-12, -3, -12]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_solution_from_list</span><span class="p">(</span> <span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;l&#39;: [-12, -3, -12],
+ &#39;k&#39;: [-12, -8, -4],
+ &#39;z&#39;: [10, -13, -19, 22, -23, 27, 27, -31],
+ &#39;gcd&#39;: 1296}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_solution</span><span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;l&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([    0,  -100,  -350,  -350,  1100,  1100,  1100, -1250, -1250])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#{ tuple(x) for x in sl[&#39;z&#39;].to_list() }.difference( { tuple(x) for x in df[&#39;z&#39;].to_list() }  )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#{ tuple(x) for x in df[&#39;z&#39;].to_list() }.difference( { tuple(x) for x in sl[&#39;solution&#39;].to_list() }  )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>32
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span><span class="o">==</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="o">-</span><span class="mi">17</span><span class="p">,</span> <span class="mi">23</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,(</span><span class="mi">200</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2, -2],
+       [-2, -1],
+       [-2,  0],
+       [-2,  1],
+       [-2,  2],
+       [-1, -2],
+       [-1, -1],
+       [-1,  0],
+       [-1,  1],
+       [-1,  2],
+       [ 0, -2],
+       [ 0, -1],
+       [ 0,  0],
+       [ 0,  1],
+       [ 0,  2],
+       [ 1, -2],
+       [ 1, -1],
+       [ 1,  0],
+       [ 1,  1],
+       [ 1,  2],
+       [ 2, -2],
+       [ 2, -1],
+       [ 2,  0],
+       [ 2,  1],
+       [ 2,  2]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;/home/restrepo/Downloads/solution_6.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">l</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">())</span><span class="o">&lt;=</span><span class="mi">32</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(111, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">=</span><span class="n">Pool</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p.map_async<span class="o">?</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">Signature:</span>
+p<span class=" -Color -Color-Blue">.</span>map_async<span class=" -Color -Color-Blue">(</span>
+    func<span class=" -Color -Color-Blue">,</span>
+    iterable<span class=" -Color -Color-Blue">,</span>
+    chunksize<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
+    callback<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
+    error_callback<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
+<span class=" -Color -Color-Blue">)</span>
+<span class=" -Color -Color-Red">Docstring:</span> Asynchronous version of `map()` method.
+<span class=" -Color -Color-Red">File:</span>      /usr/lib/python3.9/multiprocessing/pool.py
+<span class=" -Color -Color-Red">Type:</span>      method
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="markdown.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Markdown Files</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="DevOps.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">GitHub Action for DevOps</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
