@@ -18,22 +18,24 @@
 # 
 # See: https://towardsdatascience.com/how-can-data-scientists-use-parallel-processing-17194fffc6d0
 
-# In[1]:
+# In[170]:
 
 
 from multiprocessing import Pool
 from multiprocessing import cpu_count
 import time
+import random
 
 
-# In[2]:
+# In[115]:
 
 
 def f(x):
+    time.sleep(random.random())
     return x**2
 
 
-# In[60]:
+# In[173]:
 
 
 s=time.time()
@@ -42,41 +44,51 @@ result = [f(x) for x in range(N)]
 print(time.time()-s)
 
 
-# WARNING: 
+# WARNING: Take care of the RAM for large N
 
-# In[61]:
+# In[174]:
 
 
-s=time.time()
+s=time.time() #equivalent to %%time
 pool = Pool(cpu_count())
 result = pool.map(f,range(N))
 pool.close()
-print(time.time()-s)
+print(round(time.time()-s,2),'→',result[:10])
 LAZY=False
 
 
-# In[62]:
+# In[175]:
 
 
 if LAZY:
     s=time.time()
     pool = Pool(cpu_count())
-    result=[]
-    result=[ r for r in pool.imap(f,range(N),chunksize=N//cpu_count())]
+    result=pool.map_async(f,range(N))#,chunksize=N//cpu_count())
+    result=[ r for r in result.get() ]
     pool.close()
-    print(time.time()-s,result[:10])
+    print(round(time.time()-s,2),'→',result[:10])
 
 
-# In[63]:
+# In[176]:
 
 
 if LAZY:
-    result=[]
+    s=time.time()
+    pool = Pool(cpu_count())
+    result=[ r for r in pool.imap(f,range(N),chunksize=N//cpu_count())]
+    pool.close()
+    print(round(time.time()-s,2),'→',result[:10])    
+
+
+# In[177]:
+
+
+if LAZY:
     s=time.time()
     pool = Pool(cpu_count())
     result=[r for r in pool.imap_unordered(f,range(N),chunksize=N//cpu_count())]
     pool.close()
-    print(time.time()-s,result[:10])
+    print(round(time.time()-s,2),'→',result[:10])
 
 
 # ![img](https://miro.medium.com/max/700/1*n8_M7_0O2Rp3TCuqLDeeHg.png)chunksize=
@@ -88,7 +100,7 @@ if LAZY:
 
 # ### Functions
 
-# In[53]:
+# In[1]:
 
 
 import numpy as np
@@ -105,6 +117,9 @@ z=anomaly.free
 def _get_chiral(q,q_max=np.inf):
     #Normalize to positive minimum
     if 0 in q:
+        q=q[q!=0]
+        #return None,None
+    if q.size==0:
         return None,None
     if q[0]<0:
         q=-q
@@ -139,18 +154,19 @@ assert get_solution_from_list([1,2,1,-2])['z']==[1, 1, 1, -4, -4, 5]
 
 # ### Prepare running
 
-# In[56]:
+# In[2]:
 
 
-d=[{'n':6,'N':4000000,'max':11,'imax':0},
+d=[{'n':5,'N':4000000,'max':11,'imax':0},
+   {'n':6,'N':4000000,'max':11,'imax':0},
    {'n':7,'N':8000000,'max':13,'imax':0},
-   {'n':8,'N':50000000,'max':15,'imax':10},
+   {'n':8,'N':8000000,'max':15,'imax':100},
    {'n':9,'N':50000000,'max':10,'imax':40},
    {'n':10,'N':70000000,'max':10,'imax':100},
    {'n':11,'N':50000000,'max':10,'imax':100},
    {'n':12,'N':50000000,'max':10,'imax':100}]
 
-n=7
+n=8
 dd=[dd for dd in d if dd.get('n')==n][0]
 
 N=dd['N'] 
@@ -182,25 +198,38 @@ if Single:
 # pip3 install dask[complete]
 # ```
 
-# In[55]:
+# In[202]:
 
 
 import dask.array as da
 import pandas as pd
 from multiprocessing import Pool
 from multiprocessing import cpu_count
+import os
 
 
-# In[58]:
+# In[ ]:
 
 
-UNORDERED=False
+#UNORDERED=False
+RELOAD=True
+SORT=False
+if RELOAD:
+    if not os.path.exists(f'solution_{n}.json'):
+        RELOAD=False
 size_old=0
 imax=dd['imax']
 i=0
 df=pd.DataFrame()
-Δ_size=1
-while Δ_size>0:
+Δ_size=1 #Any non-zero value
+if not RELOAD:
+    df=pd.DataFrame()
+else:
+    df=pd.read_json(f'solution_{n}.json')
+
+#to save solutions in the middle of the next while
+rc=np.array([50000,10000,5000,1000,500,100,50,10,5])
+while Δ_size>-10:
     #axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280
     ll=da.random.randint(-dd['max'],dd['max']+1,(N,mm))
     ll=ll.to_dask_dataframe().drop_duplicates().to_dask_array()
@@ -213,10 +242,10 @@ while Δ_size>0:
 
     s=time.time()
     pool = Pool(cpu_count())
-    if not UNORDERED:
+    if True:# not UNORDERED:
         sls = pool.map(get_solution_from_list,ll)
-    else:
-        sls=[r for r in pool.imap_unordered(get_solution_from_list,ll,chunksize=len(ll)//cpu_count())]
+    #else:
+    #    sls=[r for r in pool.imap_unordered(get_solution_from_list,ll,chunksize=len(ll)//cpu_count())]
     pool.close()
     del ll
 
@@ -224,8 +253,9 @@ while Δ_size>0:
     print('sols → ',time.time()-s,len(sls))
 
     #Unique solutions
-    df=df.append(  sls,ignore_index=True    )  
-    df.sort_values('gcd')
+    df=df.append(  sls,ignore_index=True    )
+    if SORT:
+        df.sort_values('gcd')
     df['zs']=df['z'].astype(str)
     df=df.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
     print('unique solutions → ',df.shape)
@@ -235,7 +265,18 @@ while Δ_size>0:
     if i>=imax:
         break
 
+    Δrc=(rc-Δ_size>=0)
+    if any( Δrc ):
+        rc=rc[~Δrc]
+        df.to_json(f'solution_{n}.json',orient='records')
+        
     i+=1
+
+
+# In[175]:
+
+
+df
 
 
 # In[69]:
@@ -323,82 +364,71 @@ ll[[0 in x for x in ll]]
 # ### Check number of solutions
 # From: https://doi.org/10.5281/zenodo.5526707
 
-# In[26]:
+# In[2]:
+
+
+import pandas as pd
+
+
+# In[83]:
 
 
 df=pd.read_json('solution_8.json')
 
 
-# In[27]:
+# In[84]:
 
 
 df.shape
 
 
-# In[28]:
+# In[85]:
 
 
 import pandas as pd
 import numpy as np
 
 
-# In[33]:
+# In[86]:
 
 
 sl=pd.read_json('solutions.json')
 
 
-# In[34]:
+# In[87]:
 
 
 #sl['zs']=sl['solution'].astype(str)
 #sl=sl.drop_duplicates('zs').drop('zs',axis='columns').reset_index(drop=True)
 
 
-# In[35]:
+# In[88]:
 
 
-sl=sl[sl['n']==10]
+sl=sl[sl['n']==7]
 sl.shape
 
 
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-5569
-
-
-# In[14]:
+# In[91]:
 
 
 (sl['l']+sl['k']).apply(lambda l:np.abs(l).max()).max()
 
 
-# In[22]:
+# In[92]:
 
 
 sl=sl.rename({'solution':'z'},axis='columns')
-
-
-# In[25]:
-
-
-sl=pd.concat((sl,df)).reset_index(drop=True)
+sl=pd.concat((sl,df[df['n']==7])).reset_index(drop=True)
 sl['zs']=sl['z'].astype(str)
 sl=sl.drop_duplicates('zs',keep=False).drop('zs',axis='columns').reset_index(drop=True)
 sl.shape
 
 
-# In[34]:
+# In[93]:
 
 
-df[:3]
+sl
 
 
 # In[40]:
@@ -495,6 +525,9 @@ import pandas as pd
 
 
 df=pd.read_json('/home/restrepo/Downloads/solution_6.json')
+df['zs']=sl['z'].astype(str)
+sl=sl.drop_duplicates('zs',keep=False).reset_index(drop=True)
+sl.shape
 
 
 # In[25]:
@@ -513,6 +546,50 @@ p=Pool()
 
 
 get_ipython().run_line_magic('pinfo', 'p.map_async')
+
+
+# In[195]:
+
+
+df=pd.concat( [pd.read_json(f'solution_{n}.json') for n in  range(5,13)] )
+
+
+# In[196]:
+
+
+df.shape
+
+
+# In[197]:
+
+
+df['n']=df['z'].apply(len)
+
+df['max']=df['z'].str[-1].abs()
+
+df=df.sort_values(['n','max','gcd']).reset_index(drop=True)
+
+df['zs']=df['z'].astype(str)
+df=df.drop_duplicates('zs').drop(['zs','n','max'],axis='columns').reset_index(drop=True)
+
+
+# In[198]:
+
+
+df['n']=df['z'].apply(len)
+
+
+# In[199]:
+
+
+n=8
+df[df['n']<=n].drop('n',axis='columns').to_json(f'solution_{n}.json',orient='records')
+
+
+# In[200]:
+
+
+pd.read_json('solution_8.json')
 
 
 # In[ ]:
