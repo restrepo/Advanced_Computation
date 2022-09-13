@@ -51,7 +51,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="GitHub Action for DevOps" href="DevOps.html" />
+    <link rel="next" title="GitHub Actions for DevOps" href="DevOps.html" />
     <link rel="prev" title="Markdown Files" href="markdown.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="DevOps.html">
-   GitHub Action for DevOps
+   GitHub Actions for DevOps
   </a>
  </li>
  <li class="toctree-l1">
@@ -547,7 +547,7 @@ title="Print to PDF"
 <span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
 <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="s1">&#39;→&#39;</span><span class="p">,</span><span class="n">result</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-<span class="n">LAZY</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">LAZY</span><span class="o">=</span><span class="kc">False</span>
 </pre></div>
 </div>
 </div>
@@ -637,6 +637,9 @@ title="Print to PDF"
 <span class="k">def</span> <span class="nf">_get_chiral</span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="n">q_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
     <span class="c1">#Normalize to positive minimum</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+        <span class="c1">#q=q[q!=0]</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
+    <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">size</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
     <span class="k">if</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
         <span class="n">q</span><span class="o">=-</span><span class="n">q</span>
@@ -670,15 +673,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The history saving thread hit an unexpected error (OperationalError(&#39;attempt to write a readonly database&#39;)).History will not be written to the database.
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="prepare-running">
 <h3>Prepare running<a class="headerlink" href="#prepare-running" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">4000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">4000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">4000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
    <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">8000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">13</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>
-   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">10000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
+   <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">8000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
    <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">9</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">40</span><span class="p">},</span>
    <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">70000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
    <span class="p">{</span><span class="s1">&#39;n&#39;</span><span class="p">:</span><span class="mi">11</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="mi">50000000</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;imax&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">},</span>
@@ -733,6 +742,7 @@ sols →  499.27395939826965 103363
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+<span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 </div>
 </div>
@@ -741,6 +751,10 @@ sols →  499.27395939826965 103363
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#UNORDERED=False</span>
 <span class="n">RELOAD</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">SORT</span><span class="o">=</span><span class="kc">False</span>
+<span class="k">if</span> <span class="n">RELOAD</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">):</span>
+        <span class="n">RELOAD</span><span class="o">=</span><span class="kc">False</span>
 <span class="n">size_old</span><span class="o">=</span><span class="mi">0</span>
 <span class="n">imax</span><span class="o">=</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;imax&#39;</span><span class="p">]</span>
 <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
@@ -752,9 +766,8 @@ sols →  499.27395939826965 103363
     <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span>
 
 <span class="c1">#to save solutions in the middle of the next while</span>
-<span class="n">rc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10000</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
-
-<span class="k">while</span> <span class="n">Δ_size</span><span class="o">&gt;-</span><span class="mi">10</span><span class="p">:</span>
+<span class="n">rc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50000</span><span class="p">,</span><span class="mi">10000</span><span class="p">,</span><span class="mi">5000</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="k">while</span> <span class="n">Δ_size</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
     <span class="c1">#axis parameter not yet implemented in dask: `da.unique` → https://stackoverflow.com/a/53389741/2268280</span>
     <span class="n">ll</span><span class="o">=</span><span class="n">da</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,(</span><span class="n">N</span><span class="p">,</span><span class="n">mm</span><span class="p">))</span>
     <span class="n">ll</span><span class="o">=</span><span class="n">ll</span><span class="o">.</span><span class="n">to_dask_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">to_dask_array</span><span class="p">()</span>
@@ -778,8 +791,9 @@ sols →  499.27395939826965 103363
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sols → &#39;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">s</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">sls</span><span class="p">))</span>
 
     <span class="c1">#Unique solutions</span>
-    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  <span class="n">sls</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>    <span class="p">)</span>  
-    <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;gcd&#39;</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>  <span class="n">sls</span><span class="p">,</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">SORT</span><span class="p">:</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;gcd&#39;</span><span class="p">)</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
     <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unique solutions → &#39;</span><span class="p">,</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -798,6 +812,338 @@ sols →  499.27395939826965 103363
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grid →  3.9108076095581055 (9943907, 6)
+sols →  246.11184239387512 40129
+unique solutions →  (6482, 4)
+grid →  3.4581940174102783 (9944028, 6)
+sols →  525.0916826725006 39884
+unique solutions →  (6482, 4)
+grid →  3.321852445602417 (9943809, 6)
+sols →  244.2120499610901 40318
+unique solutions →  (6482, 4)
+grid →  3.0030972957611084 (9943783, 6)
+sols →  252.95759296417236 40241
+unique solutions →  (6482, 4)
+grid →  3.2167067527770996 (9944201, 6)
+sols →  255.38436913490295 39627
+unique solutions →  (6483, 4)
+grid →  3.4972832202911377 (9943954, 6)
+sols →  253.0398223400116 40037
+unique solutions →  (6483, 4)
+grid →  3.2513957023620605 (9944051, 6)
+sols →  249.77508282661438 40024
+unique solutions →  (6483, 4)
+grid →  3.4674363136291504 (9943833, 6)
+sols →  271.5029845237732 40356
+unique solutions →  (6483, 4)
+grid →  3.605600357055664 (9943764, 6)
+sols →  247.3318531513214 40191
+unique solutions →  (6483, 4)
+grid →  3.1665332317352295 (9943733, 6)
+sols →  251.0710461139679 39905
+unique solutions →  (6483, 4)
+grid →  3.118807554244995 (9943739, 6)
+sols →  249.51475858688354 39946
+unique solutions →  (6483, 4)
+grid →  3.147953987121582 (9943928, 6)
+sols →  254.78212332725525 40389
+unique solutions →  (6483, 4)
+grid →  3.0571229457855225 (9944107, 6)
+sols →  250.06327557563782 39952
+unique solutions →  (6483, 4)
+grid →  3.2175724506378174 (9944046, 6)
+sols →  251.04695105552673 40060
+unique solutions →  (6483, 4)
+grid →  3.107175827026367 (9944109, 6)
+sols →  251.26002383232117 39890
+unique solutions →  (6483, 4)
+grid →  3.5718822479248047 (9944144, 6)
+sols →  250.97405433654785 39843
+unique solutions →  (6483, 4)
+grid →  3.0521080493927 (9944095, 6)
+sols →  254.1130931377411 40341
+unique solutions →  (6483, 4)
+grid →  3.3113226890563965 (9943955, 6)
+sols →  290.52633476257324 40008
+unique solutions →  (6483, 4)
+grid →  3.469892978668213 (9943952, 6)
+sols →  249.13550209999084 40023
+unique solutions →  (6483, 4)
+grid →  2.8731958866119385 (9943909, 6)
+sols →  253.23727011680603 40057
+unique solutions →  (6483, 4)
+grid →  3.1084721088409424 (9944160, 6)
+sols →  248.43708181381226 40144
+unique solutions →  (6483, 4)
+grid →  3.41286039352417 (9943705, 6)
+sols →  251.07059383392334 40142
+unique solutions →  (6483, 4)
+grid →  3.251477003097534 (9943922, 6)
+sols →  244.98173642158508 39684
+unique solutions →  (6483, 4)
+grid →  2.9579756259918213 (9943609, 6)
+sols →  250.8501172065735 40198
+unique solutions →  (6483, 4)
+grid →  3.087064266204834 (9943979, 6)
+sols →  248.35191988945007 40209
+unique solutions →  (6483, 4)
+grid →  3.2476654052734375 (9943791, 6)
+sols →  249.85840368270874 40051
+unique solutions →  (6483, 4)
+grid →  3.299264907836914 (9944031, 6)
+sols →  248.46545910835266 40293
+unique solutions →  (6483, 4)
+grid →  3.1167383193969727 (9944176, 6)
+sols →  251.90682935714722 40326
+unique solutions →  (6483, 4)
+grid →  3.6707146167755127 (9943729, 6)
+sols →  246.5537552833557 39600
+unique solutions →  (6483, 4)
+grid →  3.205070734024048 (9944185, 6)
+sols →  258.1369128227234 39924
+unique solutions →  (6483, 4)
+grid →  3.2437758445739746 (9943883, 6)
+sols →  247.5734896659851 40412
+unique solutions →  (6483, 4)
+grid →  3.2906064987182617 (9944024, 6)
+sols →  251.81565856933594 39691
+unique solutions →  (6483, 4)
+grid →  2.9352638721466064 (9943552, 6)
+sols →  245.28139209747314 39683
+unique solutions →  (6483, 4)
+grid →  3.2303829193115234 (9943997, 6)
+sols →  251.53852319717407 39938
+unique solutions →  (6484, 4)
+grid →  3.06972074508667 (9943872, 6)
+sols →  252.99614715576172 40001
+unique solutions →  (6484, 4)
+grid →  4.166452884674072 (9943643, 6)
+sols →  250.49602031707764 40140
+unique solutions →  (6484, 4)
+grid →  3.128866195678711 (9943650, 6)
+sols →  245.0461688041687 40111
+unique solutions →  (6484, 4)
+grid →  3.1116347312927246 (9943729, 6)
+sols →  257.3745048046112 39745
+unique solutions →  (6484, 4)
+grid →  3.378478765487671 (9944089, 6)
+sols →  244.62923884391785 40147
+unique solutions →  (6484, 4)
+grid →  3.003067970275879 (9944057, 6)
+sols →  252.23591494560242 39970
+unique solutions →  (6484, 4)
+grid →  3.07796049118042 (9943850, 6)
+sols →  246.64098739624023 39901
+unique solutions →  (6484, 4)
+grid →  3.203972816467285 (9944125, 6)
+sols →  256.67456102371216 39975
+unique solutions →  (6484, 4)
+grid →  2.707184314727783 (9943983, 6)
+sols →  246.10720443725586 39463
+unique solutions →  (6484, 4)
+grid →  3.412198781967163 (9943870, 6)
+sols →  252.53607320785522 40044
+unique solutions →  (6484, 4)
+grid →  2.919452667236328 (9943907, 6)
+sols →  251.3599510192871 39998
+unique solutions →  (6484, 4)
+grid →  4.458654880523682 (9943788, 6)
+sols →  251.57295966148376 39899
+unique solutions →  (6484, 4)
+grid →  3.1366522312164307 (9944015, 6)
+sols →  251.4033555984497 39749
+unique solutions →  (6484, 4)
+grid →  3.3931219577789307 (9943980, 6)
+sols →  258.50497579574585 40170
+unique solutions →  (6484, 4)
+grid →  3.3484158515930176 (9943542, 6)
+sols →  248.30308628082275 40066
+unique solutions →  (6484, 4)
+grid →  2.956368923187256 (9943517, 6)
+sols →  254.46785879135132 40018
+unique solutions →  (6484, 4)
+grid →  3.093858003616333 (9943551, 6)
+sols →  247.43272757530212 40190
+unique solutions →  (6484, 4)
+grid →  3.082796335220337 (9943887, 6)
+sols →  259.3553841114044 39974
+unique solutions →  (6484, 4)
+grid →  3.7773165702819824 (9944052, 6)
+sols →  300.0500159263611 39895
+unique solutions →  (6484, 4)
+grid →  3.1775944232940674 (9944065, 6)
+sols →  252.9349925518036 39704
+unique solutions →  (6484, 4)
+grid →  3.396576404571533 (9943964, 6)
+sols →  252.6719753742218 40005
+unique solutions →  (6484, 4)
+grid →  4.349884271621704 (9944049, 6)
+sols →  252.3098967075348 39782
+unique solutions →  (6484, 4)
+grid →  3.3467020988464355 (9944093, 6)
+sols →  249.05661821365356 39822
+unique solutions →  (6484, 4)
+grid →  3.0682990550994873 (9943638, 6)
+sols →  254.48686575889587 39977
+unique solutions →  (6484, 4)
+grid →  6.047688245773315 (9943843, 6)
+sols →  246.9818298816681 40073
+unique solutions →  (6484, 4)
+grid →  3.1496922969818115 (9944247, 6)
+sols →  251.02457332611084 39627
+unique solutions →  (6484, 4)
+grid →  3.026263952255249 (9943856, 6)
+sols →  244.9588451385498 40033
+unique solutions →  (6484, 4)
+grid →  3.257261037826538 (9943891, 6)
+sols →  255.63717317581177 39944
+unique solutions →  (6484, 4)
+grid →  2.9206974506378174 (9943925, 6)
+sols →  245.34565663337708 39855
+unique solutions →  (6484, 4)
+grid →  3.3323161602020264 (9943282, 6)
+sols →  253.00211787223816 40214
+unique solutions →  (6484, 4)
+grid →  2.9591455459594727 (9943714, 6)
+sols →  250.33945655822754 39957
+unique solutions →  (6484, 4)
+grid →  3.6548867225646973 (9943662, 6)
+sols →  251.96626257896423 40086
+unique solutions →  (6484, 4)
+grid →  3.1705479621887207 (9943931, 6)
+sols →  246.21547317504883 40112
+unique solutions →  (6484, 4)
+grid →  3.3421971797943115 (9943680, 6)
+sols →  255.41870975494385 40070
+unique solutions →  (6484, 4)
+grid →  3.0547540187835693 (9943784, 6)
+sols →  245.6733283996582 39994
+unique solutions →  (6484, 4)
+grid →  2.9402270317077637 (9943846, 6)
+sols →  251.86864185333252 39827
+unique solutions →  (6484, 4)
+grid →  2.8817505836486816 (9944070, 6)
+sols →  245.9519703388214 40485
+unique solutions →  (6484, 4)
+grid →  2.8691630363464355 (9943300, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>l</th>
+      <th>k</th>
+      <th>z</th>
+      <th>gcd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[8]</td>
+      <td>[-2, 2]</td>
+      <td>[1, 5, -7, -8, 9]</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[2]</td>
+      <td>[5, -9]</td>
+      <td>[2, 4, -7, -9, 10]</td>
+      <td>330</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[-5]</td>
+      <td>[-4, -2]</td>
+      <td>[1, 14, -17, -18, 20]</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[-4]</td>
+      <td>[2, -10]</td>
+      <td>[5, 6, -12, -21, 22]</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[0, -3, 3]</td>
+      <td>[0, -3, 5, 0]</td>
+      <td>[7, 8, -18, -22, 25]</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>[0, 3, 8]</td>
+      <td>[6, -2, 6, 0]</td>
+      <td>[5, -6, -24, 27, 30, -32]</td>
+      <td>56</td>
+    </tr>
+    <tr>
+      <th>150</th>
+      <td>[-4, -2]</td>
+      <td>[8, -8]</td>
+      <td>[10, -13, -20, 26, 29, -32]</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>151</th>
+      <td>[-5, -1, -1]</td>
+      <td>[7, 4, 4, 2]</td>
+      <td>[2, 3, 13, -20, -30, 32]</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>152</th>
+      <td>[8, -4]</td>
+      <td>[1, -4]</td>
+      <td>[2, 4, 13, -22, -29, 32]</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>153</th>
+      <td>[0, 2, 7]</td>
+      <td>[8, -4, -4, 2]</td>
+      <td>[2, 7, 10, -23, -28, 32]</td>
+      <td>96</td>
+    </tr>
+  </tbody>
+</table>
+<p>154 rows × 4 columns</p>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -918,6 +1264,13 @@ grid →  11.500483989715576 (57840, 5)
 <p>From: <a class="reference external" href="https://doi.org/10.5281/zenodo.5526707">https://doi.org/10.5281/zenodo.5526707</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;solution_8.json&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -930,7 +1283,7 @@ grid →  11.500483989715576 (57840, 5)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5561, 4)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6467, 4)
 </pre></div>
 </div>
 </div>
@@ -960,20 +1313,13 @@ grid →  11.500483989715576 (57840, 5)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">8</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">7</span><span class="p">]</span>
 <span class="n">sl</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5569, 5)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">5569</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(761, 5)
 </pre></div>
 </div>
 </div>
@@ -993,13 +1339,7 @@ grid →  11.500483989715576 (57840, 5)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;solution&#39;</span><span class="p">:</span><span class="s1">&#39;z&#39;</span><span class="p">},</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">sl</span><span class="p">,</span><span class="n">df</span><span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">sl</span><span class="p">,</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">7</span><span class="p">]))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">sl</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 <span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">sl</span><span class="o">.</span><span class="n">shape</span>
@@ -1007,14 +1347,14 @@ grid →  11.500483989715576 (57840, 5)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8, 5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 5)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sl</span>
 </pre></div>
 </div>
 </div>
@@ -1041,29 +1381,25 @@ grid →  11.500483989715576 (57840, 5)
       <th>k</th>
       <th>z</th>
       <th>gcd</th>
+      <th>n</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>[3, 1, 2]</td>
-      <td>[12, 6, -12]</td>
-      <td>[2, 5, 8, -17, 19, -20, -23, 26]</td>
-      <td>54</td>
+      <td>[-1, 2, -9]</td>
+      <td>[-1, 3, 2]</td>
+      <td>[9, 9, 9, -10, -20, -26, 29]</td>
+      <td>9</td>
+      <td>7</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>[3, 4, -8]</td>
-      <td>[12, -12, 6]</td>
-      <td>[1, 7, 10, -22, -25, 28, -31, 32]</td>
-      <td>216</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>[-8, 7, -3]</td>
-      <td>[-7, 5, -7]</td>
-      <td>[1, -2, -4, 7, 8, -11, -13, 14]</td>
-      <td>315</td>
+      <td>[3, -3]</td>
+      <td>[-1, -4, -8]</td>
+      <td>[7, 11, -23, -23, 27, -31, 32]</td>
+      <td>10</td>
+      <td>7</td>
     </tr>
   </tbody>
 </table>
@@ -1371,6 +1707,9 @@ grid →  11.500483989715576 (57840, 5)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;/home/restrepo/Downloads/solution_6.json&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">sl</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">=</span><span class="n">sl</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sl</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
@@ -1396,25 +1735,172 @@ grid →  11.500483989715576 (57840, 5)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p.map_async<span class="o">?</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span>  <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">13</span><span class="p">)]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">Signature:</span>
-p<span class=" -Color -Color-Blue">.</span>map_async<span class=" -Color -Color-Blue">(</span>
-    func<span class=" -Color -Color-Blue">,</span>
-    iterable<span class=" -Color -Color-Blue">,</span>
-    chunksize<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
-    callback<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
-    error_callback<span class=" -Color -Color-Blue">=</span><span class=" -Color -Color-Green">None</span><span class=" -Color -Color-Blue">,</span>
-<span class=" -Color -Color-Blue">)</span>
-<span class=" -Color -Color-Red">Docstring:</span> Asynchronous version of `map()` method.
-<span class=" -Color -Color-Red">File:</span>      /usr/lib/python3.9/multiprocessing/pool.py
-<span class=" -Color -Color-Red">Type:</span>      method
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1956284, 4)
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">,</span><span class="s1">&#39;gcd&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;zs&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="s1">&#39;zs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;zs&#39;</span><span class="p">,</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">8</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;solution_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">.json&#39;</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s1">&#39;solution_8.json&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>l</th>
+      <th>k</th>
+      <th>z</th>
+      <th>gcd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>[8]</td>
+      <td>[-2, 2]</td>
+      <td>[1, 5, -7, -8, 9]</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[2]</td>
+      <td>[5, -9]</td>
+      <td>[2, 4, -7, -9, 10]</td>
+      <td>330</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[-5]</td>
+      <td>[-4, -2]</td>
+      <td>[1, 14, -17, -18, 20]</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[-4]</td>
+      <td>[2, -10]</td>
+      <td>[5, 6, -12, -21, 22]</td>
+      <td>32</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[0, -3, 3]</td>
+      <td>[0, -3, 5, 0]</td>
+      <td>[7, 8, -18, -22, 25]</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6479</th>
+      <td>[-6, 15, 6]</td>
+      <td>[3, 8, -9]</td>
+      <td>[9, -11, 16, -18, -19, 26, 29, -32]</td>
+      <td>1035</td>
+    </tr>
+    <tr>
+      <th>6480</th>
+      <td>[8, -12, 8]</td>
+      <td>[1, -4, -14]</td>
+      <td>[1, 8, 13, 17, -22, -23, -26, 32]</td>
+      <td>1376</td>
+    </tr>
+    <tr>
+      <th>6481</th>
+      <td>[15, -12, -6]</td>
+      <td>[15, -15, 10]</td>
+      <td>[14, -16, -22, 27, 27, -29, 31, -32]</td>
+      <td>2250</td>
+    </tr>
+    <tr>
+      <th>6482</th>
+      <td>[-10, 5, -15]</td>
+      <td>[-10, -12, 12]</td>
+      <td>[5, 5, 5, -17, -27, -27, 28, 28]</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>6483</th>
+      <td>[14, 7, 14]</td>
+      <td>[-11, -5, -11]</td>
+      <td>[11, -14, -14, 20, 23, -29, -29, 32]</td>
+      <td>294</td>
+    </tr>
+  </tbody>
+</table>
+<p>6484 rows × 4 columns</p>
+</div></div></div>
 </div>
 </div>
 </div>
@@ -1457,7 +1943,7 @@ p<span class=" -Color -Color-Blue">.</span>map_async<span class=" -Color -Color-
     <a class='right-next' id="next-link" href="DevOps.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GitHub Action for DevOps</p>
+        <p class="prev-next-title">GitHub Actions for DevOps</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub Action for DevOps &#8212; My sample book</title>
+    <title>GitHub Actions for DevOps &#8212; My sample book</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -125,7 +125,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   GitHub Action for DevOps
+   GitHub Actions for DevOps
   </a>
  </li>
  <li class="toctree-l1">
@@ -401,6 +401,28 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#command-line-program-with-options-and-arguments">
+   Command line program with options and arguments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#argparse-implementation">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       argparse
+      </span>
+     </code>
+     implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgments">
+   Acknowledgments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -414,7 +436,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>GitHub Action for DevOps</h1>
+                <h1>GitHub Actions for DevOps</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -486,6 +508,28 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#command-line-program-with-options-and-arguments">
+   Command line program with options and arguments
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#argparse-implementation">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       argparse
+      </span>
+     </code>
+     implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#acknowledgments">
+   Acknowledgments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -500,9 +544,9 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="github-action-for-devops">
-<h1>GitHub Action for DevOps<a class="headerlink" href="#github-action-for-devops" title="Permalink to this headline">#</a></h1>
-<p>The Development and IT Operations (DevOps) implemented here trough GitHub actions includes three parts</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="github-actions-for-devops">
+<h1>GitHub Actions for DevOps<a class="headerlink" href="#github-actions-for-devops" title="Permalink to this headline">#</a></h1>
+<p>The <a class="reference external" href="https://about.gitlab.com/blog/2022/04/06/can-an-smb-or-start-up-be-too-small-for-a-devops-platform/">automation</a> of the Development and IT Operations (<a class="reference external" href="https://en.wikipedia.org/wiki/DevOps">DevOps</a>) implemented here, trough <a class="reference external" href="https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions">GitHub actions</a>, includes three parts</p>
 <ol class="simple">
 <li><p>Python style guide enforcement through <code class="docutils literal notranslate"><span class="pre">flake8</span></code>. Check the <code class="docutils literal notranslate"><span class="pre">jupyterlab-flake8</span></code> extension or the <code class="docutils literal notranslate"><span class="pre">cornflakes-linter</span></code> extension of visual code, to easily fix possible syntax errors. They are activated when the file is saved. The corresponding GitHub action is triggered after each <em>commit</em>.</p></li>
 <li><p>Testing through <code class="docutils literal notranslate"><span class="pre">pytest</span></code>. The corresponding GitHub action is triggered after each <em>commit</em>.</p></li>
@@ -512,7 +556,8 @@ title="Print to PDF"
 <h2>Simple template<a class="headerlink" href="#simple-template" title="Permalink to this headline">#</a></h2>
 <p>To illustrate this three points we will use a template repository in GitHub with a very simple Python program that just returns the string: <code class="docutils literal notranslate"><span class="pre">'Hello,</span> <span class="pre">World!'</span></code>:</p>
 <p><a class="reference external" href="https://github.com/restrepo/devops">https://github.com/restrepo/devops</a></p>
-<p>From there we will create a pip package with a modified version of the template in the sandbox of <a class="reference external" href="https://pypi.org">https://pypi.org</a>, which is called <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a>. An official package could follow the same procedure but by using the official site. Please make a fork of the previous repository and rename it to some name that is not used at all in <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a>, for example, for <code class="docutils literal notranslate"><span class="pre">abc123</span></code></p>
+<p>From there we will create a pip package with a modified version of the template in the sandbox of <a class="reference external" href="https://pypi.org">https://pypi.org</a>, which is called <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a>. An official package could follow the same procedure but by using the official site.</p>
+<p>Please make a fork of the previous repository and rename it to some name that is not used at all in <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a>, for example, for <code class="docutils literal notranslate"><span class="pre">abc123</span></code></p>
 <p><a class="reference external" href="https://test.pypi.org/project/abc123/">https://test.pypi.org/project/abc123/</a></p>
 <p>the message:</p>
 <blockquote>
@@ -521,9 +566,9 @@ title="Print to PDF"
 <p>would appears there. This means that the name will be avalaible for a new (test) pip package under the name <code class="docutils literal notranslate"><span class="pre">abc123</span></code>. I will use that name from now on</p>
 <div class="section" id="test-pypi-configuration">
 <h3>(Test) pypi configuration<a class="headerlink" href="#test-pypi-configuration" title="Permalink to this headline">#</a></h3>
-<p>Please creates an account in <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a>, login there, and go to the <a class="reference external" href="https://test.pypi.org/manage/account/">“Account Settings”</a> (from the uper-right link with your chosen username).</p>
+<p>Please creates an account in <a class="reference external" href="https://test.pypi.org">https://test.pypi.org</a> verified by email, login there, and go to the <a class="reference external" href="https://test.pypi.org/manage/account/">“Account Settings”</a> (from the uper-right link with your chosen username).</p>
 <p>After the proper authentication, scroll down to the section <a class="reference external" href="https://test.pypi.org/manage/account/#api-tokens">API tokens</a> and click on the button:
-<button style="background-color:#006dad; border-color:#006dad; color: #fff;">Add API token</button>. Fill the fields “Token name”, with <code class="docutils literal notranslate"><span class="pre">github</span></code> for example, and the scope with <code class="docutils literal notranslate"><span class="pre">Entire</span> <span class="pre">account</span> <span class="pre">(all</span> <span class="pre">projects)</span></code>, after add the token, you must copy it in your clipboard this but using the button: <button style="background-color:#006dad; border-color:#006dad; color: #fff;">Copy token</button>.</p>
+<button style="background-color:#006dad; border-color:#006dad; color: #fff;">Add API token</button>. Fill the fields “Token name”, with <code class="docutils literal notranslate"><span class="pre">github</span></code> for example, and the “Scope” with <code class="docutils literal notranslate"><span class="pre">Entire</span> <span class="pre">account</span> <span class="pre">(all</span> <span class="pre">projects)</span></code>, after <button style="background-color:#006dad; border-color:#006dad; color: #fff;">Add token</button>, you must copy it in your clipboard by using the button: <button style="background-color:#006dad; border-color:#006dad; color: #fff;">Copy token</button>.</p>
 </div>
 <div class="section" id="github-settings">
 <h3>GitHub settings<a class="headerlink" href="#github-settings" title="Permalink to this headline">#</a></h3>
@@ -568,13 +613,14 @@ title="Print to PDF"
         <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
 </pre></div>
 </div>
-<p>Then, make the commit and check again the Actions tab. Wait until all the processes end up in green and check the Output by clicking in the link with the commit name, e.g “Update <a class="reference external" href="http://setup.py">setup.py</a>”.  From there click in the link with the last build preceded by the check green circle, e.g build (3.9). In the log output, expand the arrow with <code class="docutils literal notranslate"><span class="pre">Lint</span> <span class="pre">with</span> <span class="pre">flake8</span></code>  and the arrow with <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">with</span> <span class="pre">pytest</span></code>.</p>
+<p>Change the other metadata with your information. Then, make the commit and check again the Actions tab.
+Wait until all the processes end up in green and check the Output by clicking in the link with the commit name, e.g “Update <a class="reference external" href="http://setup.py">setup.py</a>”.  From there click in the link with the last build preceded by the check green circle, e.g build (3.9). In the log output, expand the arrow with <code class="docutils literal notranslate"><span class="pre">Lint</span> <span class="pre">with</span> <span class="pre">flake8</span></code>  and the arrow with <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">with</span> <span class="pre">pytest</span></code>.</p>
 <p>Also make the following corresponding changes and edits (use your own package name instead of <code class="docutils literal notranslate"><span class="pre">abc123</span></code>) , because the pypi server check for files with the same name or contents:</p>
-<ol class="simple">
+<ul class="simple">
 <li><p>Inside the directory <code class="docutils literal notranslate"><span class="pre">desoper</span></code> change the name of the file <code class="docutils literal notranslate"><span class="pre">hello.py</span></code>  to <code class="docutils literal notranslate"><span class="pre">abc123.py</span></code></p></li>
 <li><p>Edit <code class="docutils literal notranslate"><span class="pre">abc123.py</span></code> and change in line 3 <code class="docutils literal notranslate"><span class="pre">Hello</span> <span class="pre">module</span></code> by  <code class="docutils literal notranslate"><span class="pre">abc123</span> <span class="pre">module</span></code></p></li>
 <li><p>Edit <code class="docutils literal notranslate"><span class="pre">__init__.py</span> </code> and change:</p></li>
-</ol>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desoper</span> <span class="kn">import</span> <span class="n">hello</span>
 </pre></div>
 </div>
@@ -582,6 +628,15 @@ title="Print to PDF"
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desoper</span> <span class="kn">import</span> <span class="n">abc123</span>
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>Finally, change the first <code class="docutils literal notranslate"><span class="pre">hello</span></code>’s by <code class="docutils literal notranslate"><span class="pre">abc123</span></code> in the <code class="docutils literal notranslate"><span class="pre">test/test_hello.py</span></code> file:</p>
+<ul>
+<li><p>In line 2: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">desoper</span> <span class="pre">import</span> <span class="pre">abc123</span></code></p></li>
+<li><p>In line 7: <code class="docutils literal notranslate"><span class="pre">self.assertEqual(abc123.hello(),</span></code>.
+Make the commit again, and wait in the Actions tab until all the processes end up in green for the <em>last commit</em>.</p></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="section" id="python-publish-action">
 <h4>Python publish action<a class="headerlink" href="#python-publish-action" title="Permalink to this headline">#</a></h4>
@@ -603,21 +658,27 @@ This action is trigger when a new release is created. For that, go again to the 
 <p>Note that the name of the package <a class="reference external" href="https://stackoverflow.com/a/53346523/2268280">is different</a> from the <em>name of the module</em>, given by the name of the main directory inside the repository. Therefore, to use the module, we need to take into account the corresponding path in the repository:</p>
 <table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>package name</p></th>
-<th class="head"><p>main directory</p></th>
-<th class="head"><p>module file</p></th>
-<th class="head"><p>function</p></th>
+<tr class="row-odd"><th class="text-align:center head"><p>package name</p></th>
+<th class="text-align:center head"><p>main directory</p></th>
+<th class="text-align:center head"><p>module file</p></th>
+<th class="text-align:center head"><p>function</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">abc123</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">desoper</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">abc123.py</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">hello()</span></code></p></td>
+<tr class="row-even"><td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">abc123</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">desoper</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">abc123.py</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">hello()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">package</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">submodule</span></code></p></td>
+<td class="text-align:center"><p><code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
 </tr>
 </tbody>
 </table>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>$ python3
+<p>Once the <code class="docutils literal notranslate"><span class="pre">package</span></code> is installed and the <code class="docutils literal notranslate"><span class="pre">module</span></code> is imported, you can use it as <code class="docutils literal notranslate"><span class="pre">module.submodule.method()</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python3
 &gt;&gt;&gt; import desoper
 &gt;&gt;&gt; desoper.abc123.hello()
 &#39;Hello, World!
@@ -626,7 +687,7 @@ This action is trigger when a new release is created. For that, go again to the 
 <p>Note that for new releases,  the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file must be updated with the proper release number, e.g: <code class="docutils literal notranslate"><span class="pre">0.0.2</span></code>, and the related commit must pass all the previous tests.</p>
 <p><strong>Activity</strong>: Update the <a class="reference external" href="http://README.md">README.md</a> for the new package name and the new module file name, make a new release and upgrade with local pip installation (Hint: Use the <code class="docutils literal notranslate"><span class="pre">-U</span></code> option at the end of the pip install command)</p>
 <p><strong>Activity</strong>: Uninstall the package in your local computer</p>
-<p>For an example with dependencies management inside the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file, check the <code class="docutils literal notranslate"><span class="pre">anomalies</span></code> package at <a class="reference external" href="https://github.com/restrepo/anomalies">https://github.com/restrepo/anomalies</a>, where specific <code class="docutils literal notranslate"><span class="pre">numpy</span></code> version are required:</p>
+<p>For an example with dependencies management inside the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file, check the <code class="docutils literal notranslate"><span class="pre">anomalies</span></code> package at <a class="reference external" href="https://github.com/restrepo/anomalies">https://github.com/restrepo/anomalies</a>, where specific <code class="docutils literal notranslate"><span class="pre">numpy</span></code> versions are required:</p>
 <blockquote>
 <div><p>See: <a class="reference external" href="https://docs.scipy.org/doc/scipy/dev/toolchain.html#numpy">https://docs.scipy.org/doc/scipy/dev/toolchain.html#numpy</a></p>
 </div></blockquote>
@@ -694,10 +755,125 @@ git clone https://github.com/restrepo/anomalies.git
 </div>
 </div>
 </div>
+<div class="section" id="command-line-program-with-options-and-arguments">
+<h2>Command line program with options and arguments<a class="headerlink" href="#command-line-program-with-options-and-arguments" title="Permalink to this headline">#</a></h2>
+<p>The recommended parser for command-line options, arguments is <code class="docutils literal notranslate"><span class="pre">argparser</span></code></p>
+<p>In general, a command line program have the following structure, where the brackets are optionally choosen by the user and well documented in the help of the program</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ program <span class="o">[</span>OPTION<span class="o">]</span> <span class="o">[</span>ARGUMENT<span class="o">]</span> mandatory
+</pre></div>
+</div>
+<p>where
+posibles OPTION’s are</p>
+<ul class="simple">
+<li><p>-o</p></li>
+<li><p>-O</p></li>
+</ul>
+<blockquote>
+<div><p>with single hyphen for single letter option</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>–option2</p></li>
+</ul>
+<blockquote>
+<div><p>with double hyphen for full word option name
+while, posible ARGUMENT’s are</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>–argument1=something</p></li>
+<li><p>–argument2[=DEFAULT]</p></li>
+</ul>
+<blockquote>
+<div><p>always with double hyphen, ‘–’ and some DEFAULT value</p>
+</div></blockquote>
+<p>Single letter options can be combined as <code class="docutils literal notranslate"><span class="pre">-oO</span></code>.</p>
+<p><strong>Examples:</strong>
+Check</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">$ls</span> --help
+</pre></div>
+</div>
+<p>in a terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Usage</span><span class="p">:</span> <span class="n">ls</span> <span class="p">[</span><span class="n">OPTION</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="n">FILE</span><span class="p">]</span><span class="o">...</span>
+<span class="n">List</span> <span class="n">information</span> <span class="n">about</span> <span class="n">the</span> <span class="n">FILEs</span> <span class="p">(</span><span class="n">the</span> <span class="n">current</span> <span class="n">directory</span> <span class="n">by</span> <span class="n">default</span><span class="p">)</span><span class="o">.</span>
+<span class="n">Sort</span> <span class="n">entries</span> <span class="n">alphabetically</span> <span class="k">if</span> <span class="n">none</span> <span class="n">of</span> <span class="o">-</span><span class="n">cftuvSUX</span> <span class="n">nor</span> <span class="o">--</span><span class="n">sort</span> <span class="ow">is</span> <span class="n">specified</span><span class="o">.</span>
+
+<span class="n">Mandatory</span> <span class="n">arguments</span> <span class="n">to</span> <span class="n">long</span> <span class="n">options</span> <span class="n">are</span> <span class="n">mandatory</span> <span class="k">for</span> <span class="n">short</span> <span class="n">options</span> <span class="n">too</span><span class="o">.</span>
+  <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="nb">all</span>                  <span class="n">do</span> <span class="ow">not</span> <span class="n">ignore</span> <span class="n">entries</span> <span class="n">starting</span> <span class="k">with</span> <span class="o">.</span>
+  <span class="o">...</span>
+      <span class="o">--</span><span class="n">author</span>               <span class="k">with</span> <span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="nb">print</span> <span class="n">the</span> <span class="n">author</span> <span class="n">of</span> <span class="n">each</span> <span class="n">file</span>
+  <span class="o">...</span>    
+      <span class="o">--</span><span class="n">block</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="n">SIZE</span>      <span class="k">with</span> <span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="n">scale</span> <span class="n">sizes</span> <span class="n">by</span> <span class="n">SIZE</span> <span class="n">when</span> <span class="n">printing</span> <span class="n">them</span><span class="p">;</span>
+                               <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="s1">&#39;--block-size=M&#39;</span><span class="p">;</span> <span class="n">see</span> <span class="n">SIZE</span> <span class="nb">format</span> <span class="n">below</span>
+  <span class="o">...</span>
+     <span class="o">--</span><span class="n">color</span><span class="p">[</span><span class="o">=</span><span class="n">WHEN</span><span class="p">]</span>         <span class="n">colorize</span> <span class="n">the</span> <span class="n">output</span><span class="p">;</span> <span class="n">WHEN</span> <span class="n">can</span> <span class="n">be</span> <span class="s1">&#39;always&#39;</span> <span class="p">(</span><span class="n">default</span>
+                               <span class="k">if</span> <span class="n">omitted</span><span class="p">),</span> <span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="ow">or</span> <span class="s1">&#39;never&#39;</span><span class="p">;</span> <span class="n">more</span> <span class="n">info</span> <span class="n">below</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+<p>See:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/howto/argparse.html">https://docs.python.org/3/howto/argparse.html</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3">https://towardsdatascience.com/a-simple-guide-to-command-line-arguments-with-argparse-6824c30ab1c3</a></p></li>
+</ul>
+<div class="section" id="argparse-implementation">
+<h3><code class="docutils literal notranslate"><span class="pre">argparse</span></code> implementation<a class="headerlink" href="#argparse-implementation" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Creates in script, <code class="docutils literal notranslate"><span class="pre">hello</span></code>, in the bin directory of your repository which generates the following help:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./hello --help
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">hello</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">S</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">extra_message</span> <span class="n">EXTRA_MESSAGE</span><span class="p">]</span> <span class="p">[</span><span class="n">file</span><span class="p">]</span>
+
+<span class="n">Exclamative</span> <span class="n">salutation</span> <span class="n">to</span> <span class="n">the</span> <span class="n">World</span>
+
+<span class="n">positional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="n">file</span>                  <span class="n">Optional</span> <span class="n">output</span> <span class="n">file</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">-</span><span class="n">S</span><span class="p">,</span> <span class="o">--</span><span class="n">Spanish</span>         <span class="n">Change</span> <span class="n">language</span> <span class="n">to</span> <span class="n">Spanish</span>
+  <span class="o">--</span><span class="n">extra_message</span> <span class="n">EXTRA_MESSAGE</span>
+                        <span class="n">Extra</span> <span class="n">message</span> <span class="n">to</span> <span class="n">be</span> <span class="n">added</span> <span class="n">to</span> <span class="n">initial</span> <span class="n">string</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Add the <code class="docutils literal notranslate"><span class="pre">script</span></code> option with the list <code class="docutils literal notranslate"><span class="pre">[bin/hello]</span></code>, to the <a class="reference external" href="http://setup.py">setup.py</a> file</p></li>
+</ul>
+<p>Prepare your answer by following the following steps:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/MyAccountInGitHub/abc123/commit/0f7ed8e0fff495c3d19d024d403b26ef9c9293b6">Here</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MyAccountInGitHub/abc123/commit/b7c6bb5e83bdad8c03d4350da6744a3866c8a01e">Here</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MyAccountInGitHub/abc123/commit/08d32298bdf67f277982931f21aa64e2b9d6a462">And here</a></p></li>
+</ul>
+<p>Make a new release which publish the new version of the pip package. Update or install the package in your local computer, e.g:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -i https://test.pypi.org/simple/ abc123 -U
+</pre></div>
+</div>
+<p>and check that the script is properly installed and working:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> hello -S --extra_message<span class="o">=</span><span class="s1">&#39;Cruel y despiadado&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hola, ¡Mundo! Cruel y despiadado
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">#</a></h2>
+<p>Based in the GitHub repository:</p>
+<p><a class="reference external" href="https://github.com/colav/Hunahpu/">https://github.com/colav/Hunahpu/</a></p>
+</div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <p>[1] <a class="reference external" href="https://en.wikipedia.org/wiki/DevOps">https://en.wikipedia.org/wiki/DevOps</a></p>
 <p>[2] <a class="reference external" href="https://dev.to/arnu515/create-a-pypi-pip-package-test-it-and-publish-it-using-github-actions-part-2-1o83">https://dev.to/arnu515/create-a-pypi-pip-package-test-it-and-publish-it-using-github-actions-part-2-1o83</a></p>
+<p>[3] <a class="reference external" href="https://about.gitlab.com/blog/2022/04/06/can-an-smb-or-start-up-be-too-small-for-a-devops-platform/">https://about.gitlab.com/blog/2022/04/06/can-an-smb-or-start-up-be-too-small-for-a-devops-platform/</a></p>
 </div>
 </div>
 
