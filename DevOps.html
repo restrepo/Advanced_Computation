@@ -757,7 +757,7 @@ git clone https://github.com/restrepo/anomalies.git
 </div>
 <div class="section" id="command-line-program-with-options-and-arguments">
 <h2>Command line program with options and arguments<a class="headerlink" href="#command-line-program-with-options-and-arguments" title="Permalink to this headline">#</a></h2>
-<p>The recommended parser for command-line options, arguments is <code class="docutils literal notranslate"><span class="pre">argparser</span></code></p>
+<p>The recommended parser for command-line Python scripts with positional and optional arguments is <code class="docutils literal notranslate"><span class="pre">argparser</span></code>.</p>
 <p>In general, a command line program have the following structure, where the brackets are optionally choosen by the user and well documented in the help of the program</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ program <span class="o">[</span>OPTION<span class="o">]</span> <span class="o">[</span>ARGUMENT<span class="o">]</span> mandatory
 </pre></div>
@@ -765,22 +765,22 @@ git clone https://github.com/restrepo/anomalies.git
 <p>where
 posibles OPTION’s are</p>
 <ul class="simple">
-<li><p>-o</p></li>
-<li><p>-O</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-O</span></code></p></li>
 </ul>
 <blockquote>
 <div><p>with single hyphen for single letter option</p>
 </div></blockquote>
 <ul class="simple">
-<li><p>–option2</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--option2</span></code></p></li>
 </ul>
 <blockquote>
 <div><p>with double hyphen for full word option name
 while, posible ARGUMENT’s are</p>
 </div></blockquote>
 <ul class="simple">
-<li><p>–argument1=something</p></li>
-<li><p>–argument2[=DEFAULT]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--argument1=something</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--argument2[=DEFAULT]</span></code></p></li>
 </ul>
 <blockquote>
 <div><p>always with double hyphen, ‘–’ and some DEFAULT value</p>
