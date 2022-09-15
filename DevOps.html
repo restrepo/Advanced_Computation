@@ -418,6 +418,28 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apendix">
+   Apendix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#remote-git">
+   Remote GIT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ssh-keys">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ssh
+    </span>
+    <span class="pre">
+     keys
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
    Acknowledgments
   </a>
@@ -523,6 +545,28 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apendix">
+   Apendix
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#remote-git">
+   Remote GIT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ssh-keys">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     ssh
+    </span>
+    <span class="pre">
+     keys
+    </span>
+   </code>
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#acknowledgments">
@@ -862,6 +906,31 @@ Check</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<div class="section" id="apendix">
+<h2>Apendix<a class="headerlink" href="#apendix" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="remote-git">
+<h2>Remote GIT<a class="headerlink" href="#remote-git" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="ssh-keys">
+<h2><code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">keys</span></code><a class="headerlink" href="#ssh-keys" title="Permalink to this headline">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ssh-keygen
+&lt;ENTER&gt;...
+</pre></div>
+</div>
+<p>Copy the output of</p>
+<div class="highlight-$ notranslate"><div class="highlight"><pre><span></span>$ cat /home/usuario/.ssh/id_rsa.pub
+</pre></div>
+</div>
+<p>to the clipboard</p>
+<p>Now go to your general user Settings in GitHub → “SSH and GPG keys”  and click on
+<button style="color:#ffffff; background-color:#2da44e"> New SSH Key </button></p>
+<p>Paste the clipboard contents into the field “<strong>Key</strong>” and left the other empty (the will autofill with the key info)</p>
+<p>Clone any repository with the link in <button style="color:#ffffff; background-color:#2da44e"> &lt;&gt; Code </button> → SSH, e.g</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:MyAccountInGitHub/abc123.git
+</pre></div>
 </div>
 </div>
 <div class="section" id="acknowledgments">
