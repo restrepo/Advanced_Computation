@@ -374,6 +374,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependencies-management">
+   Dependencies management
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#local-management-of-devops">
    Local management of DevOps
   </a>
@@ -501,6 +506,11 @@ title="Print to PDF"
     </ul>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependencies-management">
+   Dependencies management
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#local-management-of-devops">
@@ -731,6 +741,11 @@ This action is trigger when a new release is created. For that, go again to the 
 <p>Note that for new releases,  the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file must be updated with the proper release number, e.g: <code class="docutils literal notranslate"><span class="pre">0.0.2</span></code>, and the related commit must pass all the previous tests.</p>
 <p><strong>Activity</strong>: Update the <a class="reference external" href="http://README.md">README.md</a> for the new package name and the new module file name, make a new release and upgrade with local pip installation (Hint: Use the <code class="docutils literal notranslate"><span class="pre">-U</span></code> option at the end of the pip install command)</p>
 <p><strong>Activity</strong>: Uninstall the package in your local computer</p>
+</div>
+</div>
+</div>
+<div class="section" id="dependencies-management">
+<h2>Dependencies management<a class="headerlink" href="#dependencies-management" title="Permalink to this headline">#</a></h2>
 <p>For an example with dependencies management inside the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> file, check the <code class="docutils literal notranslate"><span class="pre">anomalies</span></code> package at <a class="reference external" href="https://github.com/restrepo/anomalies">https://github.com/restrepo/anomalies</a>, where specific <code class="docutils literal notranslate"><span class="pre">numpy</span></code> versions are required:</p>
 <blockquote>
 <div><p>See: <a class="reference external" href="https://docs.scipy.org/doc/scipy/dev/toolchain.html#numpy">https://docs.scipy.org/doc/scipy/dev/toolchain.html#numpy</a></p>
@@ -741,8 +756,6 @@ This action is trigger when a new release is created. For that, go again to the 
             <span class="s1">&#39;numpy&gt;=1.16.5; python_version==&quot;3.9&quot;&#39;</span>
         <span class="p">],</span>
 </pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="local-management-of-devops">
