@@ -1,4 +1,4 @@
-# Find interger lists with linear and cubic add to zero
+# Find integer lists with linear and cubic add to zero
 The program we will search non vectorlike solutions with a fix number of integers, $z_i$, starting with $n=5$. 
 
 For that, it must use two lists of integers, $l$ and $k$, which are build from a single list of $n-2$ arbitrary integers, to be generated either from a grid or from a random scan.
@@ -16,7 +16,7 @@ $$
 N_{\rm unique}=(2m+1)^{(n-2)}\,.
 $$
 
-From each one, we will extract the $l$ and $k$ input list of dimensions ${\rm dim}\\, l=({\rm dim}\\,  z)//2$ and ${\rm dim}\\,  k=n-2-{\rm dim}\\, l$. 
+From each one, we will extract the $l$ and $k$ input list of dimensions ${\rm dim}\\, l=(n-2)//2$ and ${\rm dim}\\,  k=n-2-{\rm dim}\\, l$. 
 
 Because for large $n$ this list will no fit in RAM, we choose to generate $i$-lists ${\bf L}$ from a random scan, each one with $N$ lists of $n-2$ integers from $-m$ to $m$. The process will be repeated from $i=0$ until $i=i_{\rm max}$. Note that $N\gg N_{\rm unique}$ to guarantee that the full grid is obtained when $i_{\rm max}=0$
 

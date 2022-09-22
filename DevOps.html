@@ -49,6 +49,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Notebooks with MyST Markdown" href="markdown-notebooks.html" />
@@ -423,6 +425,16 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exam-1">
+   Exam 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instructions">
+   Instructions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#apendix">
    Apendix
   </a>
@@ -555,6 +567,16 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exam-1">
+   Exam 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#instructions">
+   Instructions
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#apendix">
@@ -920,6 +942,48 @@ Check</p>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="exam-1">
+<h2>Exam 1<a class="headerlink" href="#exam-1" title="Permalink to this headline">#</a></h2>
+<p>The current implementation of the program to find integer lists with linear and cubic add to zero explained in
+the Chapter <a class="reference external" href="https://restrepo.github.io/Advanced_Computation/Multiprocessing.html">Multiprocessing</a>,
+we will search non vectorlike solutions with a fix number of integers, <span class="math notranslate nohighlight">\(z_i\)</span>, starting with
+<span class="math notranslate nohighlight">\(n=5\)</span>.</p>
+<p>For that, it must use two lists of integers, <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(k\)</span>, which are build from a single list of <span class="math notranslate nohighlight">\(n-2\)</span> ar
+bitrary integers, to be generated either from a grid or from a random scan.</p>
+<p>The maximum in absolute value of the list <span class="math notranslate nohighlight">\(z\)</span>, <span class="math notranslate nohighlight">\(z_{\rm  max}\)</span>, can be obtained from a much lesser maximu
+m in absolute value of the lists <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(k\)</span>:
+<span class="math notranslate nohighlight">\(m={\rm max}(|l|,|k|).\)</span></p>
+<p>For a given <span class="math notranslate nohighlight">\(z_{\rm  max}\)</span>, we can find the optimal <span class="math notranslate nohighlight">\(m\)</span> by increasing  it in one unit and checking that
+not extra solutions are found.</p>
+<p>In the algorithm, we will generate a list of <span class="math notranslate nohighlight">\(n-2\)</span>-integer lists, <span class="math notranslate nohighlight">\({\bf L}\)</span>, with elements between <span class="math notranslate nohighlight">\(-m\)</span>
+and <span class="math notranslate nohighlight">\(m\)</span>. Therefore, the list <span class="math notranslate nohighlight">\({\bf L}\)</span> will contain the following number of <span class="math notranslate nohighlight">\(n-2\)</span> lists:</p>
+<div class="math notranslate nohighlight">
+\[
+N_{\rm unique}=(2m+1)^{(n-2)}\,.
+\]</div>
+<p>From each one, we will extract the <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(k\)</span> input list of dimensions <span class="math notranslate nohighlight">\({\rm dim}\, l=(n-2)//2\)</span> and <span class="math notranslate nohighlight">\({
+\rm dim}\,  k=n-2-{\rm dim}\, l\)</span>, where <span class="math notranslate nohighlight">\(//\)</span> means the integer division in Python</p>
+<p>Because for large <span class="math notranslate nohighlight">\(n\)</span> this list will no fit in RAM, we choose to generate <span class="math notranslate nohighlight">\(i\)</span>-lists <span class="math notranslate nohighlight">\({\bf L}\)</span> from a ran
+dom scan, each one with <span class="math notranslate nohighlight">\(N\)</span> lists of <span class="math notranslate nohighlight">\(n-2\)</span> integers from <span class="math notranslate nohighlight">\(-m\)</span> to <span class="math notranslate nohighlight">\(m\)</span>. The process will be repeated from
+<span class="math notranslate nohighlight">\(i=0\)</span> until <span class="math notranslate nohighlight">\(i=i_{\rm max}\)</span>. Note that <span class="math notranslate nohighlight">\(N\gg N_{\rm unique}\)</span> to guarantee that the full grid is obtained
+when <span class="math notranslate nohighlight">\(i_{\rm max}=0\)</span></p>
+</div>
+<div class="section" id="instructions">
+<h2>Instructions<a class="headerlink" href="#instructions" title="Permalink to this headline">#</a></h2>
+<p>Upload a package in <a class="reference external" href="http://test.pypi.org">test.pypi.org</a> which contains</p>
+<p>A) The actions for <code class="docutils literal notranslate"><span class="pre">flake8</span></code> and <code class="docutils literal notranslate"><span class="pre">pytest</span></code> with the release passed as green in the <a class="reference external" href="http://README.md">README.md</a> buttons, along with the action for deploy the package in <a class="reference external" href="http://test.pypi.org">test.pypi.org</a>. Remember that the the dependences need to be declared in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> as explained <a class="reference external" href="https://restrepo.github.io/Advanced_Computation/DevOps.html#dependencies-management">before</a>.</p>
+<p>B) Contains a script with some program name, which contains at least the following options and arguments implemented with <code class="docutils literal notranslate"><span class="pre">argparse</span></code> of Python and includes a good documentation for the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>programname --N<span class="o">=</span><span class="m">500000</span> --m<span class="o">=</span><span class="m">9</span> --zmax<span class="o">=</span><span class="m">30</span> --imax<span class="o">=</span><span class="m">0</span> --output_name<span class="o">=</span><span class="s1">&#39;solution&#39;</span> <span class="m">6</span>
+</pre></div>
+</div>
+<p>It will generate a file with the name <code class="docutils literal notranslate"><span class="pre">solution_6.json</span></code> with the solutions for <span class="math notranslate nohighlight">\(n=6\)</span> and <span class="math notranslate nohighlight">\(z_{\rm max}=30\)</span> from a single list (<span class="math notranslate nohighlight">\(i_{\rm max}=0\)</span>)  of lists <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(k\)</span> in the range between <span class="math notranslate nohighlight">\(-9\)</span> to <span class="math notranslate nohighlight">\(9\)</span>.</p>
+<p>C) The tests to be passed with <code class="docutils literal notranslate"><span class="pre">pytest</span></code> must include at least the following for <span class="math notranslate nohighlight">\(z_{\rm max}=30\)</span>, with the optimal <span class="math notranslate nohighlight">\(N\)</span> and <span class="math notranslate nohighlight">\(m\)</span>:</p>
+<ul class="simple">
+<li><p>Test that the number of solutions for <span class="math notranslate nohighlight">\(n=5\)</span> is 11</p></li>
+<li><p>Test that the number of solutions for <span class="math notranslate nohighlight">\(n=6\)</span> is 112</p></li>
+</ul>
+<p>D) Includes ONLY the link to the  <a class="reference external" href="http://test.pypi.org">test.pypi.org</a> in the Google Classroom submission</p>
 </div>
 <div class="section" id="apendix">
 <h2>Apendix<a class="headerlink" href="#apendix" title="Permalink to this headline">#</a></h2>
