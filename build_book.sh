@@ -1,1 +1,1 @@
-jupyter-book build --all /home/restrepo/prog/cursos/Advanced_Computation/
+jupyter-book build --all $(pwd)
