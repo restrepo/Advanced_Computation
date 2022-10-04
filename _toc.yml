@@ -7,4 +7,5 @@ chapters:
 - file: markdown
 - file: Multiprocessing
 - file: DevOps
+- file: Data_Analysis
 - file: markdown-notebooks
