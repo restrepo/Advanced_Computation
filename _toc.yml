@@ -4,7 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
 - file: Multiprocessing
 - file: DevOps
 - file: Data_Analysis
