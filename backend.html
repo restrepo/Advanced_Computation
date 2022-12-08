@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; Advanced Computation</title>
+    <title>Backend &#8212; Advanced Computation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -200,7 +200,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/restrepo/Advanced_Computation/master?urlpath=tree/docs/Untitled.ipynb"
+        <a href="https://mybinder.org/v2/gh/restrepo/Advanced_Computation/master?urlpath=tree/docs/backend.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -260,7 +260,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/restrepo/Advanced_Computation/issues/new?title=Issue%20on%20page%20%2FUntitled.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/restrepo/Advanced_Computation/issues/new?title=Issue%20on%20page%20%2Fbackend.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -288,7 +288,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/Untitled.ipynb"
+        <a href="_sources/backend.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -325,50 +325,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><no title></h1>
+                <h1>Backend</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -376,7 +349,65 @@ title="Print to PDF"
                 
               <div>
                 
-  
+  <div class="tex2jax_ignore mathjax_ignore section" id="backend">
+<h1>Backend<a class="headerlink" href="#backend" title="Permalink to this headline">#</a></h1>
+<p>Starts a web server that serves the backend of the application.</p>
+<p>Consider the JSON associated with the gradres of this course with the following data scheme</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>[ # cerberus schema
+    {&quot;student_id&quot;: {&#39;type&#39;:&#39;integer&#39;}, 
+     &quot;parcial_1&quot;: {&quot;type&quot;:&quot;list&quot;, 
+                  &quot;schema&quot;:{&quot;grades&quot;: {&#39;type&#39;:&#39;float&#39;},
+                            &quot;comment&quot;: {&#39;type&#39;:&#39;string&#39;}
+                  }
+            }
+    }
+]
+</pre></div>
+</div>
+<p>such that the grade is a float between 0 and 5 and the comment is a string to define and justify the grade.</p>
+<p>The application, <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">main.py</span></code></span>, should be able to handle the requests associated with a specific <code class="docutils literal notranslate"><span class="pre">&quot;student_id&quot;</span></code> from the <code class="docutils literal notranslate"><span class="pre">grades.json</span></code> file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;grades.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="n">REBUILD_DATA</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">if</span> <span class="n">REBUILD_DATA</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;grades.csv&#39;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;grades.csv&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;student_id&quot;</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Cédula&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;parcial_1&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;grade&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span>
+                <span class="p">},</span>
+            <span class="s2">&quot;parcial_2&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;grade&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span>
+                <span class="p">},</span>
+            <span class="s2">&quot;Tareas&quot;</span><span class="p">:{</span>
+                <span class="s2">&quot;grade&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+                <span class="s2">&quot;comment&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span>
+                <span class="p">}</span>            
+        <span class="p">})</span>
+
+    <span class="n">f</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;grades.json&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
