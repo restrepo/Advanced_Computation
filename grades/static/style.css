@@ -1,0 +1,29 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #070116;
+  }
+  
+  div {
+    text-align: center;
+    background-color: rgb(41, 216, 216);
+    padding: 10px;
+  }
+  
+  .output {
+    text-align: center; 
+    color: white; 
+    font-size: 20px;
+  }
+  
+  .active {
+    margin: 40px;
+    padding: 50px;
+    font-size: 20px;
+    color: white;
+    letter-spacing: 2px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: linear-gradient( 160deg, #ff0000, #ec008c );
+    border-radius: 30px;
+    cursor: pointer;
+  }
