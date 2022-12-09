@@ -11,7 +11,7 @@
    "parcial_2": {"grade": 5.0, "percentage": 34, "comment": ""}, 
    "Tareas": {"grade": 5.0, "percentage": 33, "comment": ""}}, 
    {"student_id": 1036650362, "parcial_1": {"grade": 5.0, "percentage": 33, "comment": ""}, 
-   "parcial_2": {"grade": 0, "percentage": 34, "comment": ""}, 
+   "parcial_2": {"grade": 5.0, "percentage": 34, "comment": ""}, 
    "Tareas": {"grade": 5.0, "percentage": 33, "comment": ""}}, 
    {"student_id": 1067846911, "parcial_1": {"grade": 3.5, "percentage": 33, "comment": ""}, 
    "parcial_2": {"grade": 3.5, "percentage": 34, "comment": ""}, 
@@ -19,6 +19,6 @@
    {"student_id": 1044508251, "parcial_1": {"grade": 5.0, "percentage": 33, "comment": ""}, 
    "parcial_2": {"grade": 5.0, "percentage": 34, "comment": ""}, 
    "Tareas": {"grade": 5.0, "percentage": 33, "comment": ""}}, 
-   {"student_id": 1037667562, "parcial_1": {"grade": 0, "percentage": 33, "comment": ""}, 
+   {"student_id": 1037667562, "parcial_1": {"grade": 5.0, "percentage": 33, "comment": ""}, 
    "parcial_2": {"grade": 5.0, "percentage": 34, "comment": ""}, 
    "Tareas": {"grade": 5.0, "percentage": 33, "comment": ""}}]
